@@ -5,7 +5,17 @@ import MainPageSections from "@/layouts/MainPageSections.astro";
 import { siteData, ctaData } from "@/content/siteData";
 ---
 
-<BaseLayout title="Home" description={siteData.description}>
+<BaseLayout
+  title="Pronto Junk Removal"
+  description={siteData.description}
+  seo={{
+    metaTitle: "Pronto Junk Removal | Fast & Affordable Junk Removal in Woodbridge, NJ",
+    metaDescription: "Pronto Junk Removal offers same-day junk removal, cleanouts, and demolition debris hauling in Woodbridge Township, NJ and surrounding Middlesex County. Call 732-710-5405 for a free quote.",
+    ogTitle: "Pronto Junk Removal — Woodbridge, NJ",
+    ogDescription: "Fast, reliable junk removal serving Woodbridge Township & Middlesex County, NJ. House cleanouts, hoarder cleanouts, appliance removal & more. Get a free quote today.",
+    keywords: ["junk removal Woodbridge NJ", "junk removal Middlesex County", "same day junk removal NJ", "house cleanout NJ", "hoarder cleanout NJ", "appliance removal NJ", "debris removal Woodbridge", "Pronto Junk Removal"],
+  }}
+>
   <main class="flex-1">
     <FrontPageHero
       eyebrow={siteData.tagline}

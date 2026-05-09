@@ -5,7 +5,7 @@ export const siteData = {
   title: "Pronto Junk Removal",
   legalName: "Pronto Junk Removal LLC",
   tagline: "Serving Middlesex County, NJ And More",
-  description: "Fast, reliable junk removal based in Woodbridge, NJ. We handle rummage, cleanouts, demolition debris, and more — so you don't have to.",
+  description: "Fast, reliable junk removal based in Woodbridge Township, NJ. We handle cleanouts, demolition debris, appliance removal, and more — so you don't have to.",
   domain: SITE_DOMAIN,
   url: SITE_URL,
   location: "Woodbridge Township, NJ",
