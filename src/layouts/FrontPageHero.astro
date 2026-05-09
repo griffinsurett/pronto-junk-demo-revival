@@ -20,6 +20,7 @@
 import BackgroundMedia from "@/components/BackgroundMedia.astro";
 import { ctaData } from "@/content/siteData";
 import DefaultImg from "@/assets/hero.jpg";
+import { animationProps } from "@/integrations/scroll-animations";
 
 export interface Props {
   title?: string;
@@ -90,19 +91,19 @@ const backgroundMedia = {
 
   <div class="relative w-full max-w-[1440px] mx-auto px-6 lg:px-12 text-center z-10">
     {eyebrow && (
-      <p class="font-mont font-bold uppercase tracking-wide text-[18px] lg:text-[20px]">
+      <p {...animationProps("fade-in", { once: true, delay: 0 })} class="font-mont font-bold uppercase tracking-wide text-[18px] lg:text-[20px]">
         {eyebrow}
       </p>
     )}
-    <h1 class:list={["font-rob font-black leading-[60px] lg:leading-[105px] text-[60px] lg:text-[105px] uppercase", eyebrow ? "mt-6" : ""]}>
+    <h1 {...animationProps("fade-in-up", { once: true, delay: eyebrow ? 100 : 0 })} class:list={["font-rob font-black leading-[60px] lg:leading-[105px] text-[60px] lg:text-[105px] uppercase", eyebrow ? "mt-6" : ""]}>
       {title}
     </h1>
     {description && (
-      <p class="mt-6 font-sans text-[18px] lg:text-[20px] leading-relaxed max-w-2xl mx-auto opacity-90">
+      <p {...animationProps("fade-in-up", { once: true, delay: 200 })} class="mt-6 font-sans text-[18px] lg:text-[20px] leading-relaxed max-w-2xl mx-auto opacity-90">
         {description}
       </p>
     )}
-    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+    <div {...animationProps("fade-in-up", { once: true, delay: 300 })} class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
       {primaryCTA && (
         <a href={primaryCTA.link} class="inline-flex items-center justify-center w-[300px] h-20 rounded-md font-mont font-bold text-[25px] btn-yellow">
           {primaryCTA.text}

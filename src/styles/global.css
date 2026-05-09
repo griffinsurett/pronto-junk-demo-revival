@@ -163,6 +163,10 @@ body {
 }
 
 @layer utilities {
+  .sticky-section {
+    @apply lg:sticky lg:top-[107px] lg:self-start;
+  }
+
   @keyframes slide-up {
     from {
       opacity: 0;

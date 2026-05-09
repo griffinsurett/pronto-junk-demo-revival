@@ -1,6 +1,7 @@
 ---
 import type { BaseVariantProps } from "../ContentRenderer.types";
 import GalleryCarousel from "@/components/GalleryCarousel";
+import { animationProps } from "@/integrations/scroll-animations";
 
 interface Props extends BaseVariantProps {}
 const { items = [], title, description } = Astro.props as Props;
@@ -21,4 +22,6 @@ const galleryItems = items
   .filter(Boolean) as { src: string; alt: string }[];
 ---
 
-<GalleryCarousel items={galleryItems} title={title} description={description} client:visible />
+<div {...animationProps("fade-in-up", { once: true })}>
+  <GalleryCarousel items={galleryItems} title={title} description={description} client:visible />
+</div>

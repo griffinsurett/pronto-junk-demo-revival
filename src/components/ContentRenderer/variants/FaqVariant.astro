@@ -1,5 +1,6 @@
 ---
 import type { BaseVariantProps } from "../ContentRenderer.types";
+import { animationProps, staggeredAnimationProps } from "@/integrations/scroll-animations";
 
 interface Props extends BaseVariantProps {}
 const { items = [], title } = Astro.props as Props;
@@ -8,21 +9,23 @@ const { items = [], title } = Astro.props as Props;
 <section class="bg-black text-white py-16 lg:py-[100px]">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     {title && (
-      <h2 class="font-mont font-bold text-center text-[32px] lg:text-[40px] text-white">{title}</h2>
+      <h2 {...animationProps("fade-in-up", { once: true })} class="font-mont font-bold text-center text-[32px] lg:text-[40px] text-white">{title}</h2>
     )}
     <div class="mt-10 space-y-3">
-      {items.map((item) => (
-        <details class="rounded-md" style="background:rgba(191,191,191,0.24);">
-          <summary class="flex items-center gap-4 px-5 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="accordion-bullet chev">
-              <svg width="9" height="5" viewBox="0 0 9 5" fill="#000">
-                <path d="M8.126 4.941H.587C.065 4.941-.196 4.31.173 3.941L3.942.172a.585.585 0 0 1 .829 0l3.769 3.769c.369.369.108 1-.414 1z"/>
-              </svg>
-            </span>
-            <span class="font-rob font-bold text-[16px] text-white">{item.title}</span>
-          </summary>
-          <div class="px-14 pb-5 font-sans text-[16px] text-white/85">{item.description}</div>
-        </details>
+      {items.map((item, i) => (
+        <div {...staggeredAnimationProps("fade-in-up", i, { once: true, staggerDelay: 60 })}>
+          <details class="rounded-md" style="background:rgba(191,191,191,0.24);">
+            <summary class="flex items-center gap-4 px-5 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              <span class="accordion-bullet chev">
+                <svg width="9" height="5" viewBox="0 0 9 5" fill="#000">
+                  <path d="M8.126 4.941H.587C.065 4.941-.196 4.31.173 3.941L3.942.172a.585.585 0 0 1 .829 0l3.769 3.769c.369.369.108 1-.414 1z"/>
+                </svg>
+              </span>
+              <span class="font-rob font-bold text-[16px] text-white">{item.title}</span>
+            </summary>
+            <div class="px-14 pb-5 font-sans text-[16px] text-white/85">{item.description}</div>
+          </details>
+        </div>
       ))}
     </div>
   </div>

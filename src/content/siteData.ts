@@ -16,5 +16,5 @@ export const siteData = {
 
 export const ctaData = {
   text: "Get a Free Quote",
-  link: "#contact",
+  link: "/contact-us",
 }

@@ -1,5 +1,6 @@
 ---
 import type { BaseVariantProps } from "../ContentRenderer.types";
+import { animationProps, staggeredAnimationProps } from "@/integrations/scroll-animations";
 
 interface Props extends BaseVariantProps {}
 const { items = [], title } = Astro.props as Props;
@@ -13,13 +14,13 @@ const icons: Record<number, string> = {
 <section class="bg-black text-white py-16 lg:py-[110px]">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     {title && (
-      <h2 class="font-mont font-bold text-center text-[36px] lg:text-[45px] leading-[1.15] lg:leading-[67.5px] text-white">
+      <h2 {...animationProps("fade-in-up", { once: true })} class="font-mont font-bold text-center text-[36px] lg:text-[45px] leading-[1.15] lg:leading-[67.5px] text-white">
         {title}
       </h2>
     )}
     <div class="mt-12 grid gap-6 lg:gap-[60px] lg:grid-cols-2">
       {items.map((item, i) => (
-        <div class="w-full bg-primary border-2 border-black text-black p-8 lg:p-12 text-center">
+        <div {...staggeredAnimationProps(i % 2 === 0 ? "fade-in-left" : "fade-in-right", i, { once: true, staggerDelay: 120 })} class="w-full bg-primary border-2 border-black text-black p-8 lg:p-12 text-center">
           <div class="mx-auto w-[65px] h-[65px] grid place-items-center" set:html={icons[i] ?? icons[0]} />
           <h3 class="mt-4 font-mont font-bold text-[25px] leading-[37.5px]">{item.title}</h3>
           <p class="mt-2 font-rob text-[16px] leading-6 max-w-md mx-auto">{item.description}</p>

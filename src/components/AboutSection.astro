@@ -1,6 +1,7 @@
 ---
 import ContentRenderer from "@/components/ContentRenderer/ContentRenderer.astro";
 import { query, sortByOrder } from "@/utils/query";
+import { animationProps } from "@/integrations/scroll-animations";
 
 interface Props { isHomepage?: boolean; }
 const { isHomepage = false } = Astro.props;
@@ -8,14 +9,14 @@ const { isHomepage = false } = Astro.props;
 
 <section id="about" class="py-16 lg:py-[70px]">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
-    <h2 class="font-mont font-bold text-center text-[28px] sm:text-[36px] lg:text-[40px] leading-[1.05] text-black">
+    <h2 {...animationProps("fade-in-up", { once: true })} class="font-mont font-bold text-center text-[28px] sm:text-[36px] lg:text-[40px] leading-[1.05] text-black">
       We Do The Work So You Don't Have To
     </h2>
 
-    <div class="mt-12 grid gap-12 lg:gap-16 lg:grid-cols-3">
+    <div class="mt-12 flex flex-col lg:flex-row gap-12 lg:gap-16 lg:items-start">
 
-      <!-- Col 1: Founder story + socials -->
-      <div>
+      <!-- Left: Founder story + socials (scrolls) -->
+      <div {...animationProps("fade-in-left", { once: true, delay: 100 })} class="lg:w-[38%] shrink-0">
         <h3 class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333]">
           Founded By Teens on a<br/>Mission for Success...
         </h3>
@@ -46,24 +47,30 @@ const { isHomepage = false } = Astro.props;
         </div>
       </div>
 
-      <!-- Col 2: Team photos -->
-      <div>
-        <h3 class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333]">Meet The Junk Crew</h3>
-        <div class="mt-4 overflow-hidden">
-          <img src="/assets/team1.jpg" alt="The Junk Crew" class="w-full h-auto block"/>
+      <!-- Right: sticky block — crew photos + services side by side -->
+      <div class="sticky-section flex-1 grid grid-cols-1 sm:grid-cols-2 gap-10 lg:gap-12">
+
+        <!-- Meet The Junk Crew -->
+        <div {...animationProps("fade-in-up", { once: true, delay: 200 })}>
+          <h3 class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333]">Meet The Junk Crew</h3>
+          <div class="mt-4 overflow-hidden">
+            <img src="/assets/team1.jpg" alt="The Junk Crew" class="w-full h-auto block"/>
+          </div>
+          <div class="mt-6 overflow-hidden">
+            <img src="/assets/team2.jpg" alt="The Junk Crew on the job" class="w-full h-auto block"/>
+          </div>
         </div>
-        <div class="mt-6 overflow-hidden">
-          <img src="/assets/team2.jpg" alt="The Junk Crew on the job" class="w-full h-auto block"/>
+
+        <!-- What We Do -->
+        <div {...animationProps("fade-in-right", { once: true, delay: 300 })}>
+          <ContentRenderer
+            query={query("services").orderBy(sortByOrder())}
+            variant="ServicesVariant"
+            title="What We Do"
+          />
         </div>
+
       </div>
-
-      <!-- Col 3: Services accordion -->
-      <ContentRenderer
-        query={query("services").orderBy(sortByOrder())}
-        variant="ServicesVariant"
-        title="What We Do"
-      />
-
     </div>
   </div>
 </section>

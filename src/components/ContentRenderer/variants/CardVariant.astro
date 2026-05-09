@@ -9,6 +9,7 @@ import type { BaseVariantProps } from "../ContentRenderer.types";
 import FeatureCard from "@/components/LoopComponents/FeatureCard.astro";
 import Button from "@/components/Button/Button";
 import { shouldShowCollectionCTA } from "../utils/helpers";
+import { animationProps, staggeredAnimationProps } from "@/integrations/scroll-animations";
 
 interface Props extends BaseVariantProps {
   columns?: 1 | 2 | 3 | 4;
@@ -38,7 +39,7 @@ const columnClasses = {
 <section id={id} class={`py-16 ${className}`}>
   {
     (title || description) && (
-      <div class="text-center mb-12">
+      <div {...animationProps("fade-in-up", { once: true })} class="text-center mb-12">
         {title && <h2 class="text-4xl text-heading font-bold mb-4">{title}</h2>}
         {description && (
           <p class="text-lg text-text max-w-2xl mx-auto">{description}</p>
@@ -50,8 +51,8 @@ const columnClasses = {
   {
     items.length > 0 && (
       <ul class={`grid ${columnClasses[columns]} gap-8 list-none items-stretch`}>
-        {items.map((item) => (
-          <li class="flex">
+        {items.map((item, i) => (
+          <li {...staggeredAnimationProps("fade-in-up", i, { once: true, staggerDelay: 100 })} class="flex">
             <FeatureCard {...item} />
           </li>
         ))}
@@ -61,7 +62,7 @@ const columnClasses = {
 
   {
     shouldShowCollectionCTA(collectionUrl, items.length) && (
-      <div class="mt-12 text-center">
+      <div {...animationProps("pop-in", { once: true })} class="mt-12 text-center">
         <Button
           href={collectionUrl}
           rightIcon="lu:chevron-right"

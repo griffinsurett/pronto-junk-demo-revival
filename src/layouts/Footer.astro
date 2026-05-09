@@ -1,5 +1,5 @@
 ---
-import { siteData } from "@/content/siteData";
+import { siteData, ctaData } from "@/content/siteData";
 import CookiePreferencesButton from "@/integrations/preferences/consent/ui/CookiePreferencesButton";
 import AccessibilityButton from "@/integrations/preferences/accessibility/ui/AccessibilityButton";
 
@@ -12,8 +12,8 @@ const year = new Date().getFullYear();
     <div class="max-w-[1200px] mx-auto px-6 py-14 lg:py-20 text-center">
       <h2 class="font-mont font-bold text-[24px] lg:text-[25px] text-black">Want Junk Removed?</h2>
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#contact" class="inline-flex items-center justify-center px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-yellow">
-          Get Quote
+        <a href={ctaData.link} class="inline-flex items-center justify-center px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-yellow">
+          {ctaData.text}
         </a>
         <a href={siteData.phoneHref} class="inline-flex items-center justify-center gap-3 px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-black">
           <svg width="14" height="14" viewBox="0 0 13 13" fill="currentColor">

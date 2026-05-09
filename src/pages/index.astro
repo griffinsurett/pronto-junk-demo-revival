@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import FrontPageHero from "@/layouts/FrontPageHero.astro";
 import MainPageSections from "@/layouts/MainPageSections.astro";
-import { siteData } from "@/content/siteData";
+import { siteData, ctaData } from "@/content/siteData";
 ---
 
 <BaseLayout title="Home" description={siteData.description}>
@@ -10,7 +10,7 @@ import { siteData } from "@/content/siteData";
     <FrontPageHero
       eyebrow={siteData.tagline}
       title={siteData.title}
-      primaryCTA={{ text: "Get Quote", link: "#contact" }}
+      primaryCTA={ctaData}
     />
     <MainPageSections isHomepage={true} />
   </main>

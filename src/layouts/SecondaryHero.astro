@@ -16,6 +16,7 @@
 import { getAuthorName } from "@/layouts/collections/helpers/layoutHelpers";
 import BackgroundMedia from "@/components/BackgroundMedia.astro";
 import backgroundSvg from "@/assets/hero.jpg";
+import { animationProps } from "@/integrations/scroll-animations";
 
 export interface Props {
   title: string;
@@ -63,7 +64,7 @@ const backgroundMedia = {
     {/* Hero content */}
     <div class="relative container mx-auto px-4 py-16 md:py-24 z-10">
       <div class="max-w-4xl mx-auto text-center text-bg">
-        <nav aria-label="Breadcrumb" class="flex items-center justify-center gap-2 mb-6 text-sm md:text-base text-bg/80">
+        <nav {...animationProps("fade-in", { once: true, delay: 0 })} aria-label="Breadcrumb" class="flex items-center justify-center gap-2 mb-6 text-sm md:text-base text-bg/80">
           <a href="/" class="hover:text-primary transition-colors">Home</a>
           <svg class="w-3 h-3 text-bg/50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -79,13 +80,13 @@ const backgroundMedia = {
           <span class="text-white font-medium" aria-current="page">{title}</span>
         </nav>
 
-        <h1 class="font-rob font-black uppercase text-[48px] md:text-[64px] lg:text-[80px] leading-tight mb-6 drop-shadow-lg">
+        <h1 {...animationProps("fade-in-up", { once: true, delay: 100 })} class="font-rob font-black uppercase text-[48px] md:text-[64px] lg:text-[80px] leading-tight mb-6 drop-shadow-lg">
           {title}
         </h1>
 
         {
           description && (
-            <p class="mt-4 font-mont font-bold text-[18px] lg:text-[20px] leading-relaxed opacity-95 drop-shadow-md">
+            <p {...animationProps("fade-in-up", { once: true, delay: 200 })} class="mt-4 font-mont font-bold text-[18px] lg:text-[20px] leading-relaxed opacity-95 drop-shadow-md">
               {description}
             </p>
           )
@@ -94,7 +95,7 @@ const backgroundMedia = {
         {/* Metadata row with icons */}
         {
           (publishDate || author || readingTime) && (
-            <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base text-bg/90">
+            <div {...animationProps("fade-in", { once: true, delay: 300 })} class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base text-bg/90">
               {publishDate && (
                 <time
                   datetime={new Date(publishDate).toISOString()}

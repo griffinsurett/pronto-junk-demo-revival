@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import FrontPageHero from "@/layouts/FrontPageHero.astro";
 import MainPageSections from "@/layouts/MainPageSections.astro";
-import { siteData } from "@/content/siteData";
+import { siteData, ctaData } from "@/content/siteData";
 
 const { entry } = Astro.props;
 const locationName = entry?.data?.title ?? "Your Area";
@@ -16,7 +16,7 @@ const locationName = entry?.data?.title ?? "Your Area";
     <FrontPageHero
       eyebrow={`Serving ${locationName}`}
       title={siteData.title}
-      primaryCTA={{ text: "Get Quote", link: "#contact" }}
+      primaryCTA={ctaData}
     />
     <MainPageSections />
   </main>
