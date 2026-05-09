@@ -14,5 +14,15 @@
     "icon": "lu:mail",
     "tags": ["email"],
     "linkPrefix": "mailto:"
+  },
+  {
+    "id": "location",
+    "title": "Woodbridge Township, NJ",
+    "description": "Woodbridge Township, NJ 07095",
+    "url": "https://www.google.com/maps/search/?api=1&query=Woodbridge%20Township%2C%20NJ%2007095",
+    "mapEmbedUrl": "https://maps.google.com/maps?q=40.5576,-74.2846&z=13&output=embed",
+    "icon": "lu:map-pin",
+    "tags": ["location"],
+    "linkBehavior": { "mode": "none" }
   }
 ]

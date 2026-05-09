@@ -20,10 +20,12 @@ const icons: Record<number, string> = {
     )}
     <div class="mt-12 grid gap-6 lg:gap-[60px] lg:grid-cols-2">
       {items.map((item, i) => (
-        <div {...staggeredAnimationProps(i % 2 === 0 ? "fade-in-left" : "fade-in-right", i, { once: true, staggerDelay: 120 })} class="w-full bg-primary border-2 border-black text-black p-8 lg:p-12 text-center">
-          <div class="mx-auto w-[65px] h-[65px] grid place-items-center" set:html={icons[i] ?? icons[0]} />
-          <h3 class="mt-4 font-mont font-bold text-[25px] leading-[37.5px]">{item.title}</h3>
-          <p class="mt-2 font-rob text-[16px] leading-6 max-w-md mx-auto">{item.description}</p>
+        <div {...staggeredAnimationProps(i % 2 === 0 ? "fade-in-left" : "fade-in-right", i, { once: true, staggerDelay: 120 })}>
+          <div class="w-full text-black p-8 lg:p-12 text-center border-2 border-black/20" style="background:linear-gradient(180deg,#F6AD00 0%,#c86000 100%)">
+            <div class="mx-auto w-[65px] h-[65px] grid place-items-center" set:html={icons[i] ?? icons[0]} />
+            <h3 class="mt-4 font-mont font-bold text-[25px] leading-[37.5px]">{item.title}</h3>
+            <p class="mt-2 font-rob text-[16px] leading-6 max-w-md mx-auto">{item.description}</p>
+          </div>
         </div>
       ))}
     </div>

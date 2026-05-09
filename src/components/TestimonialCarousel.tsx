@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Icon from "@/components/Icon";
 import useAutoplay from "@/hooks/autoplay/useAutoplay";
 import { usePauseableState } from "@/hooks/autoplay/usePauseableState";
@@ -48,20 +48,32 @@ export default function TestimonialCarousel({ testimonials }: { testimonials: Te
     setIndex(i);
   };
 
+  const fadeUp = (delay = 0): React.CSSProperties => ({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0)" : "translateY(1.5rem)",
+    transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
+  });
+
+  const popIn = (delay = 0): React.CSSProperties => ({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "scale(1)" : "scale(0.85)",
+    transition: `opacity 0.5s ease ${delay}ms, transform 0.5s ease ${delay}ms`,
+  });
+
   return (
     <section
       ref={containerRef}
-      style={{ background: "linear-gradient(180deg,#FFA800 0%, #000 100%)" }}
+      style={{ background: "linear-gradient(180deg,#F6AD00 0%,#c86000 100%)" }}
       className="py-16 lg:py-[70px]"
       onMouseEnter={() => { engageUser(); pause(); }}
       onMouseLeave={() => handleResumeActivity("hover-away")}
     >
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
-        <h2 className="font-mont font-bold text-center text-[36px] lg:text-[45px] leading-[1.15] text-black">
+        <h2 style={fadeUp(0)} className="font-mont font-bold text-center text-[36px] lg:text-[45px] leading-[1.15] text-black">
           Hear From Our Customers
         </h2>
 
-        <div className="mt-10 lg:mt-14 relative">
+        <div style={fadeUp(150)} className="mt-10 lg:mt-14 relative">
           {/* Track */}
           <div className="overflow-hidden">
             <div
@@ -98,6 +110,7 @@ export default function TestimonialCarousel({ testimonials }: { testimonials: Te
           <button
             onClick={goPrev}
             aria-label="Previous testimonial"
+            style={popIn(200)}
             className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 lg:w-[50px] lg:h-[50px] bg-black text-white grid place-items-center hover:bg-neutral-800 transition-colors z-10"
           >
             <Icon icon="fa6:chevron-left" size="md" />
@@ -105,6 +118,7 @@ export default function TestimonialCarousel({ testimonials }: { testimonials: Te
           <button
             onClick={goNext}
             aria-label="Next testimonial"
+            style={popIn(200)}
             className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-12 h-12 lg:w-[50px] lg:h-[50px] bg-black text-white grid place-items-center hover:bg-neutral-800 transition-colors z-10"
           >
             <Icon icon="fa6:chevron-right" size="md" />
@@ -112,7 +126,7 @@ export default function TestimonialCarousel({ testimonials }: { testimonials: Te
         </div>
 
         {/* Dots */}
-        <nav className="mt-6 flex justify-center gap-3" aria-label="Testimonial pagination">
+        <nav style={fadeUp(300)} className="mt-6 flex justify-center gap-3" aria-label="Testimonial pagination">
           {testimonials.map((_, i) => (
             <button
               key={i}

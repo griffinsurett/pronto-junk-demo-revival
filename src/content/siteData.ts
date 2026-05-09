@@ -8,7 +8,7 @@ export const siteData = {
   description: "Fast, reliable junk removal based in Woodbridge, NJ. We handle rummage, cleanouts, demolition debris, and more — so you don't have to.",
   domain: SITE_DOMAIN,
   url: SITE_URL,
-  location: "Woodbridge, NJ",
+  location: "Woodbridge Township, NJ",
   address: "Woodbridge Township, NJ 07095",
   phone: "732-710-5405",
   phoneHref: "tel:+17327105405",

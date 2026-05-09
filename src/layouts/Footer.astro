@@ -2,6 +2,7 @@
 import { siteData, ctaData } from "@/content/siteData";
 import CookiePreferencesButton from "@/integrations/preferences/consent/ui/CookiePreferencesButton";
 import AccessibilityButton from "@/integrations/preferences/accessibility/ui/AccessibilityButton";
+import { animationProps } from "@/integrations/scroll-animations";
 
 const year = new Date().getFullYear();
 ---
@@ -10,12 +11,12 @@ const year = new Date().getFullYear();
   <!-- CTA strip + footer bottom, seamless gradient into black -->
   <div id="contact" class="relative" style="background: linear-gradient(180deg,#FFA800 0%, #000 100%);">
     <div class="max-w-[1200px] mx-auto px-6 py-14 lg:py-20 text-center">
-      <h2 class="font-mont font-bold text-[24px] lg:text-[25px] text-black">Want Junk Removed?</h2>
+      <h2 {...animationProps("fade-in-up", { once: true })} class="font-mont font-bold text-[24px] lg:text-[25px] text-black">Want Junk Removed?</h2>
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={ctaData.link} class="inline-flex items-center justify-center px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-yellow">
+        <a {...animationProps("pop-in", { once: true, delay: 100 })} href={ctaData.link} class="inline-flex items-center justify-center px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-yellow">
           {ctaData.text}
         </a>
-        <a href={siteData.phoneHref} class="inline-flex items-center justify-center gap-3 px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-black">
+        <a {...animationProps("pop-in", { once: true, delay: 200 })} href={siteData.phoneHref} class="inline-flex items-center justify-center gap-3 px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-black">
           <svg width="14" height="14" viewBox="0 0 13 13" fill="currentColor">
             <path d="M12.528.625 9.887.016a.751.751 0 0 0-.698.352L7.97 3.212a.74.74 0 0 0 .176.711l1.538 1.26a11.27 11.27 0 0 1-4.5 4.499l-1.258-1.539a.745.745 0 0 0-.711-.175L.371 9.187a.747.747 0 0 0-.356.7l.61 2.641A.75.75 0 0 0 1.219 13C7.722 13 13 7.732 13 1.219A.75.75 0 0 0 12.528.625z"/>
           </svg>
@@ -28,14 +29,14 @@ const year = new Date().getFullYear();
   <!-- Black footer bottom -->
   <div class="bg-black text-white" style="margin-top:-1px;">
     <div class="max-w-[1440px] mx-auto px-6 lg:px-[81px] pt-14 pb-8 text-center">
-      <img src="/assets/logo.png" alt={siteData.title} class="mx-auto w-[160px] h-[160px] lg:w-[228px] lg:h-[228px] object-contain"/>
-      <h3 class="mt-6 font-mont font-bold text-[24px] lg:text-[25px] text-white">{siteData.title}</h3>
+      <img {...animationProps("pop-in", { once: true })} src="/assets/logo.png" alt={siteData.title} class="mx-auto w-[160px] h-[160px] lg:w-[228px] lg:h-[228px] object-contain"/>
+      <h3 {...animationProps("fade-in-up", { once: true, delay: 100 })} class="mt-6 font-mont font-bold text-[24px] lg:text-[25px] text-white">{siteData.title}</h3>
 
       <!-- Divider -->
-      <div class="mt-8 border-t border-white/10"></div>
+      <div {...animationProps("fade-in", { once: true, delay: 200 })} class="mt-8 border-t border-white/10"></div>
 
       <!-- Legal + preferences + copyright all under divider -->
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mont text-[14px] lg:text-[15px] text-white/70">
+      <div {...animationProps("fade-in-up", { once: true, delay: 250 })} class="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mont text-[14px] lg:text-[15px] text-white/70">
         <a href="/legal/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a>
         <span class="text-white/30">·</span>
         <a href="/legal/terms-of-service" class="hover:text-white transition-colors">Terms of Service</a>
@@ -48,7 +49,7 @@ const year = new Date().getFullYear();
       </div>
 
       <!-- Copyright -->
-      <div class="mt-4 flex flex-col lg:flex-row gap-2 lg:gap-0 lg:justify-between items-center font-mont text-[14px] lg:text-[15px] text-white/85">
+      <div {...animationProps("fade-in-up", { once: true, delay: 300 })} class="mt-4 flex flex-col lg:flex-row gap-2 lg:gap-0 lg:justify-between items-center font-mont text-[14px] lg:text-[15px] text-white/85">
         <span>&copy;{year} PRONTO Junk Removal. All Rights Reserved.</span>
         <a href="https://griffinswebservices.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Built By Griffin's Web Services</a>
       </div>

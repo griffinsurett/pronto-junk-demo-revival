@@ -1,7 +1,15 @@
 ---
 import { roots, children } from "@/utils/query/snippets";
+import { find } from "@/utils/query";
 import { animationProps } from "@/integrations/scroll-animations";
 import { ctaData } from "@/content/siteData";
+
+const locationEntry = await find("contact-us", "location");
+const locationData = locationEntry?.data;
+const locationText = (locationData as any)?.description || "Woodbridge Township, NJ 07095";
+const locationTitle = locationData?.title || "Woodbridge Township, NJ";
+const locationUrl = (locationData as any)?.url || "https://www.google.com/maps/search/?api=1&query=Woodbridge%20Township%2C%20NJ%2007095";
+const mapEmbedUrl = (locationData as any)?.mapEmbedUrl || "https://maps.google.com/maps?q=40.5576,-74.2846&z=13&output=embed";
 
 const counties = await roots("locations").all();
 
@@ -16,7 +24,7 @@ const countyRows = await Promise.all(
 <section id="locations" class="py-16 lg:py-[70px]">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     <h2 {...animationProps("fade-in-up", { once: true })} class="font-rob font-bold text-center text-[28px] lg:text-[32px] leading-[1.1] text-[#333]">
-      We are Located In Woodbridge Township
+      We are Located In {locationTitle}
     </h2>
 
     <div class="mt-10 flex flex-col lg:flex-row gap-10 lg:items-start">
@@ -49,36 +57,18 @@ const countyRows = await Promise.all(
         </div>
       </div>
 
-      <!-- Map placeholder (sticky) -->
-      <div {...animationProps("fade-in-right", { once: true, delay: 150 })} class="sticky-section lg:w-[45%] shrink-0 relative w-full h-[300px] lg:h-[420px] rounded-sm overflow-hidden border border-black/10" style="background:#E5E3DF">
-        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 537 300" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0 90 L537 70" stroke="#fff" stroke-width="6"/>
-          <path d="M0 180 L537 200" stroke="#fff" stroke-width="6"/>
-          <path d="M120 0 L150 300" stroke="#fff" stroke-width="6"/>
-          <path d="M380 0 L400 300" stroke="#fff" stroke-width="6"/>
-          <path d="M0 250 L537 240" stroke="#fff" stroke-width="3"/>
-          <path d="M260 0 L270 300" stroke="#fff" stroke-width="3"/>
-          <path d="M0 30 L537 20" stroke="#cfd8e0" stroke-width="2"/>
-        </svg>
-        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full">
-          <svg width="34" height="44" viewBox="0 0 24 32" fill="#E94235">
-            <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 20 12 20s12-11 12-20C24 5.4 18.6 0 12 0z"/>
-            <circle cx="12" cy="12" r="4" fill="#fff"/>
-          </svg>
-        </div>
-        <div class="absolute top-2.5 left-2.5 bg-white rounded-sm px-3 py-2 max-w-[200px]" style="box-shadow:0 1px 4px -1px rgba(0,0,0,0.3)">
-          <div class="font-rob font-medium text-[14px] text-black">Middlesex County</div>
-          <div class="font-rob text-[12px] text-[#5b5b5b]">New Jersey</div>
-        </div>
-        <div class="absolute bottom-3 right-3 bg-white rounded-sm w-10 overflow-hidden" style="box-shadow:0 1px 4px -1px rgba(0,0,0,0.3)">
-          <button class="grid w-full h-10 place-items-center text-[#666] hover:bg-black/5" aria-label="Zoom in">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M18 7h-7V0H7v7H0v4h7v7h4v-7h7z"/></svg>
-          </button>
-          <div class="h-px mx-1.5 bg-[#e6e6e6]"></div>
-          <button class="grid w-full h-10 place-items-center text-[#666] hover:bg-black/5" aria-label="Zoom out">
-            <svg width="18" height="4" viewBox="0 0 18 4" fill="currentColor"><path d="M0 0h18v4H0z"/></svg>
-          </button>
-        </div>
+      <!-- Map (sticky) -->
+      <div {...animationProps("fade-in-right", { once: true, delay: 150 })} class="sticky-section lg:w-[45%] shrink-0 w-full h-[300px] lg:h-[420px] rounded-sm overflow-hidden border border-black/10 shadow-sm">
+        <iframe
+          src={mapEmbedUrl}
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title={`Map of ${locationText}`}
+        ></iframe>
       </div>
     </div>
 

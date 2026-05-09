@@ -38,7 +38,7 @@ export default function GalleryCarousel({ items, title, description }: {
   const translatePct = (index / spv) * 100;
 
   return (
-    <section className="py-16 lg:py-[50px]">
+    <section className="py-16 lg:py-[50px] overflow-x-hidden">
       <div className="max-w-[1200px] mx-auto text-center">
         {title && (
           <h2 className="font-mont font-bold text-[36px] lg:text-[45px] leading-[1.1] lg:leading-[67.5px] text-black px-6 lg:px-12">
@@ -80,7 +80,7 @@ export default function GalleryCarousel({ items, title, description }: {
             onClick={() => goTo(index - 1)}
             disabled={index === 0}
             aria-label="Previous image"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 lg:w-12 lg:h-12 bg-black text-white grid place-items-center hover:bg-neutral-800 disabled:opacity-40 transition-opacity z-10"
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 lg:w-12 lg:h-12 bg-black text-white grid place-items-center hover:bg-neutral-800 disabled:opacity-40 transition-opacity z-10"
           >
             <Icon icon="fa6:chevron-left" size="md" />
           </button>
@@ -89,7 +89,7 @@ export default function GalleryCarousel({ items, title, description }: {
             onClick={() => goTo(index + 1)}
             disabled={index >= maxIndex}
             aria-label="Next image"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 lg:w-12 lg:h-12 bg-black text-white grid place-items-center hover:bg-neutral-800 disabled:opacity-40 transition-opacity z-10"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 lg:w-12 lg:h-12 bg-black text-white grid place-items-center hover:bg-neutral-800 disabled:opacity-40 transition-opacity z-10"
           >
             <Icon icon="fa6:chevron-right" size="md" />
           </button>

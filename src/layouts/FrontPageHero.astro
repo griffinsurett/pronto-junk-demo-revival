@@ -86,7 +86,7 @@ const backgroundMedia = {
 };
 ---
 
-<section id={id} class={`relative overflow-hidden text-white flex items-center ${className}`} style={`min-height:${minHeight}`}>
+<section id={id} class={`relative overflow-hidden text-white flex items-center justify-center ${className}`} style={`min-height:${minHeight}`}>
   <BackgroundMedia backgroundMedia={backgroundMedia} />
 
   <div class="relative w-full max-w-[1440px] mx-auto px-6 lg:px-12 text-center z-10">
@@ -105,7 +105,7 @@ const backgroundMedia = {
     )}
     <div {...animationProps("fade-in-up", { once: true, delay: 300 })} class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
       {primaryCTA && (
-        <a href={primaryCTA.link} class="inline-flex items-center justify-center w-[300px] h-20 rounded-md font-mont font-bold text-[25px] btn-yellow">
+        <a href={primaryCTA.link} class="inline-flex items-center justify-center w-[300px] h-20 rounded-md font-mont font-bold text-[25px] btn-yellow mx-auto sm:mx-0">
           {primaryCTA.text}
         </a>
       )}
