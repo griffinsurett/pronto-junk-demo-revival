@@ -20,7 +20,7 @@ const isTopLevel = level === 0;
 <ul
   class={isTopLevel
     ? "menu-list menu-list-top-level flex items-center gap-2"
-    : "menu-list menu-list-submenu absolute left-0 top-full min-w-[200px] bg-bg shadow-lg rounded-lg py-2 z-50 border border-surface"}
+    : "menu-list menu-list-submenu absolute left-0 top-full mt-3 min-w-[200px] bg-bg shadow-lg rounded-lg py-2 z-50 border border-surface"}
 >
   {items.map((item) => <MenuItem {...item} level={level} />)}
 </ul>
