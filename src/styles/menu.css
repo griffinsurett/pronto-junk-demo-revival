@@ -46,14 +46,18 @@
   position: relative;
 }
 
-/* Keep hover active across the gap between trigger and dropdown */
-.pronto-header-menu .menu-item {
-  padding-bottom: 8px;
+.pronto-header-menu .menu-list-submenu {
+  min-width: 240px;
 }
 
-.pronto-header-menu .menu-list-submenu {
-  margin-top: -8px;
-  min-width: 240px;
+/* Transparent bridge above dropdown so hover doesn't break */
+.pronto-header-menu .menu-list-submenu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 0;
+  right: 0;
+  height: 6px;
 }
 
 .pronto-header-menu .menu-link-submenu {
