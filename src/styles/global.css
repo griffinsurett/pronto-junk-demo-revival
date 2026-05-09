@@ -55,12 +55,12 @@
   --color-accent-950:  oklch(from var(--color-accent) calc(l - 0.45) c h);
 }
 
-html, body {
-  overflow-x: hidden;
-}
-
 body {
   font-family: var(--font-sans);
+}
+
+#app {
+  overflow-x: clip;
 }
 
 @layer components {
