@@ -1,5 +1,78 @@
 /* src/styles/menu.css */
 
+.pronto-header-menu .menu-desktop {
+  font-family: var(--font-sans);
+  font-size: 18px;
+}
+
+.pronto-header-menu .menu-list-top-level {
+  gap: 2rem;
+}
+
+.pronto-header-menu .menu-link-top-level {
+  padding: 0;
+  border-radius: 0;
+  font-weight: 400;
+  color: #000;
+  background: transparent;
+}
+
+.pronto-header-menu .menu-link-top-level {
+  position: relative;
+  color: #000;
+  background: transparent;
+}
+
+.pronto-header-menu .menu-link-top-level::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #FFA800, #c86000);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+.pronto-header-menu .menu-link-top-level:hover::after,
+.pronto-header-menu .menu-link-top-level:focus-visible::after,
+.pronto-header-menu .menu-link-top-level[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.pronto-header-menu .menu-entry {
+  position: relative;
+}
+
+.pronto-header-menu .menu-list-submenu {
+  min-width: 240px;
+}
+
+.pronto-header-menu .menu-link-submenu {
+  position: relative;
+  color: #000;
+}
+
+.pronto-header-menu .menu-link-submenu::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, #FFA800, #c86000);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+.pronto-header-menu .menu-link-submenu:hover::after,
+.pronto-header-menu .menu-link-submenu[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
 /* Menu hover behavior - works for infinite nesting */
 .menu-item:hover > .menu-dropdown {
   display: block;

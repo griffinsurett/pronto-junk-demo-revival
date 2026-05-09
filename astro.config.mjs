@@ -21,7 +21,7 @@ console.log(`Site URL: ${siteUrl}`);
 export default defineConfig({
   site: siteUrl,
   trailingSlash: 'never',
-  server: { port: 9090 },
+  server: { port: 7656 },
   output: 'static',
   
   vite: {

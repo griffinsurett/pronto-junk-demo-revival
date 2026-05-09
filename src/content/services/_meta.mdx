@@ -1,21 +1,15 @@
 ---
 title: "Services"
-description: "Our professional services"
+description: "Full-service junk removal for homes, businesses, and outdoor spaces."
 hasPage: true
 itemsHasPage: true
 itemsRootPath: true
-itemsAddToMenu:
-  - menu: "main-menu"
 addToMenu:
   - menu: "main-menu"
+    title: "What We Do"
+    order: 4
   - menu: "footer-menu"
+itemsAddToMenu:
+  - menu: "main-menu"
+    attachTo: "services"
 ---
-import ContentRenderer from '@/components/ContentRenderer/ContentRenderer.astro';
-import { query, sortByOrder } from '@/utils/query';
-
-    <ContentRenderer
-      query={query("services").orderBy(sortByOrder())}
-      variant="GridVariant"
-      columns={3}
-      gap="lg"
-    />

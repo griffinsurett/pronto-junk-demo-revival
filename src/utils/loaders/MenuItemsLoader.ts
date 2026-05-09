@@ -343,7 +343,7 @@ async function processCollectionMenus(
         const collectionId = getUniqueId(semanticId);
 
         const hasPage = meta.hasPage ?? false;
-        const itemUrl = hasPage ? `/${collection}` : undefined;
+        const itemUrl = menuConfig.url ?? (hasPage ? `/${collection}` : undefined);
 
         store.set({
           id: collectionId,

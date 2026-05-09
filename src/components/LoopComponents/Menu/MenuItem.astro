@@ -46,26 +46,17 @@ const isToggleOnly = hasChildren && !url;
 
 const linkClasses = isTopLevel
   ? `
-    flex items-center gap-1 px-4 py-2 rounded-md transition-colors font-medium
-    ${
-      isActive || childIsActive
-        ? "text-primary bg-primary/10"
-        : "text-text hover:text-primary hover:bg-text/5"
-    }
+    menu-link menu-link-top-level flex items-center gap-1 px-4 py-2 transition-colors font-medium text-text
   `
   : `
-    flex items-center gap-1 px-4 py-2 text-sm transition-colors whitespace-nowrap
-    ${
-      isActive
-        ? "text-primary bg-primary/10 font-medium"
-        : "text-text hover:text-primary hover:bg-text/5"
-    }
+    menu-link menu-link-submenu flex items-center gap-1 px-4 py-2 text-sm transition-colors whitespace-nowrap text-text
+    ${isActive ? "font-medium" : ""}
   `;
 
 const dropdownId = `dropdown-${slug}-${level}`;
 ---
 
-<li class={`relative ${hasChildren ? "menu-item" : ""}`}>
+<li class={`menu-entry relative ${hasChildren ? "menu-item" : ""}`}>
   {isToggleOnly ? (
     <button
       type="button"

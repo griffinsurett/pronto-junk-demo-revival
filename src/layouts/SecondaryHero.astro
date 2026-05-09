@@ -15,7 +15,7 @@
 
 import { getAuthorName } from "@/layouts/collections/helpers/layoutHelpers";
 import BackgroundMedia from "@/components/BackgroundMedia.astro";
-import backgroundSvg from "@/assets/background.svg";
+import backgroundSvg from "@/assets/hero.jpg";
 
 export interface Props {
   title: string;
@@ -63,13 +63,21 @@ const backgroundMedia = {
     {/* Hero content */}
     <div class="relative container mx-auto px-4 py-16 md:py-24 z-10">
       <div class="max-w-4xl mx-auto text-center text-bg">
-        {
-          eyebrow && (
-            <p class="inline-flex items-center justify-center px-5 py-2 mb-6 rounded-full border border-bg/60 text-sm md:text-base font-semibold tracking-[0.28em] uppercase text-bg/95">
-              {eyebrow}
-            </p>
-          )
-        }
+        <nav aria-label="Breadcrumb" class="flex items-center justify-center gap-2 mb-6 text-sm md:text-base text-bg/80">
+          <a href="/" class="hover:text-primary transition-colors">Home</a>
+          <svg class="w-3 h-3 text-bg/50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          {eyebrow && eyebrow !== title ? (
+            <>
+              <span class="text-bg/80">{eyebrow}</span>
+              <svg class="w-3 h-3 text-bg/50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </>
+          ) : null}
+          <span class="text-white font-medium" aria-current="page">{title}</span>
+        </nav>
 
         <h1
           class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg"

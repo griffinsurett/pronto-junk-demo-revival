@@ -1,0 +1,37 @@
+---
+import type { BaseVariantProps } from "../ContentRenderer.types";
+
+interface Props extends BaseVariantProps {}
+const { items = [], title } = Astro.props as Props;
+---
+
+<div>
+  {title && (
+    <h3 id="services" class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333]">{title}</h3>
+  )}
+  <div class="mt-4 space-y-3">
+    {items.map((item) => (
+      <details>
+        <summary class="flex items-center gap-3 py-1 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          <span class="accordion-bullet chev shrink-0">
+            <svg width="9" height="5" viewBox="0 0 9 5" fill="#000">
+              <path d="M8.126 4.941H.587C.065 4.941-.196 4.31.173 3.941L3.942.172a.585.585 0 0 1 .829 0l3.769 3.769c.369.369.108 1-.414 1z"/>
+            </svg>
+          </span>
+          <span class="font-rob font-bold text-[16px] text-black">{item.title}</span>
+        </summary>
+        <div class="pl-[40px] pb-3">
+          {item.description && (
+            <p class="font-sans text-[15px] leading-[1.6] text-[#555]">{item.description}</p>
+          )}
+          <a
+            href={`/services/${item.slug}`}
+            class="inline-block mt-3 text-[13px] font-sans text-black border-b-2 border-primary hover:opacity-70 transition-opacity"
+          >
+            Learn More →
+          </a>
+        </div>
+      </details>
+    ))}
+  </div>
+</div>

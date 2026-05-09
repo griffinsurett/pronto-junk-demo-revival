@@ -17,15 +17,15 @@
  * Use directly in your homepage or marketing pages.
  */
 
-import Button from "@/components/Button/Button";
 import BackgroundMedia from "@/components/BackgroundMedia.astro";
 import { ctaData } from "@/content/siteData";
-import DefaultImg from "@/assets/background.svg";
+import DefaultImg from "@/assets/hero.jpg";
 
 export interface Props {
   title?: string;
+  eyebrow?: string;
   description?: string;
-  image?: any; // Astro image asset or public path
+  image?: any;
   video?: {
     src: string;
     autoPlay?: boolean;
@@ -50,6 +50,7 @@ export interface Props {
 
 const {
   title = "Welcome",
+  eyebrow,
   description,
   image,
   video,
@@ -60,15 +61,13 @@ const {
   secondaryCTA,
   className = "",
   id = "hero",
-  minHeight = "95vh",
+  minHeight = "90vh",
 } = Astro.props;
 
-// Prepare optimized background media
 const backgroundMedia = {
   image: {
     src: image || DefaultImg,
-    imageClass: "bg-cover bg-center",
-    aboveTheFold: true, // Front page hero is always LCP
+    aboveTheFold: true,
   },
   video: video
     ? {
@@ -82,66 +81,40 @@ const backgroundMedia = {
         videoClass: "object-cover",
       }
     : undefined,
-  overlayClass: "bg-gradient-to-b from-black/30 to-black/60",
+  overlayClass: "bg-black/60",
 };
 ---
 
-<section id={id} class={`relative ${className}`}>
-  <div
-    class="relative flex items-center justify-center overflow-hidden"
-    style={`min-height: ${minHeight}`}
-  >
-    {/* Optimized background media with overlay */}
-    <BackgroundMedia backgroundMedia={backgroundMedia} />
+<section id={id} class={`relative overflow-hidden text-white flex items-center ${className}`} style={`min-height:${minHeight}`}>
+  <BackgroundMedia backgroundMedia={backgroundMedia} />
 
-    {/* Hero Content */}
-    <div class="relative text-center text-bg px-8 max-w-4xl mx-auto z-10">
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-        {title}
-      </h1>
-
-      {
-        description && (
-          <p class="text-xl md:text-2xl mb-10 opacity-95 leading-relaxed max-w-3xl mx-auto">
-            {description}
-          </p>
-        )
-      }
-
-      {/* CTA Buttons */}
-      <div class="flex gap-4 justify-center flex-wrap">
-        {
-          primaryCTA && (
-            <Button
-              href={primaryCTA.link}
-              variant="primary"
-              size="lg"
-              className="shadow-xl hover:shadow-2xl transition-shadow"
-            >
-              {primaryCTA.text}
-            </Button>
-          )
-        }
-
-        {
-          secondaryCTA && (
-            <Button href={secondaryCTA.link} variant="ghost" size="lg">
-              {secondaryCTA.text}
-            </Button>
-          )
-        }
-      </div>
+  <div class="relative w-full max-w-[1440px] mx-auto px-6 lg:px-12 text-center z-10">
+    {eyebrow && (
+      <p class="font-mont font-bold uppercase tracking-wide text-[18px] lg:text-[20px]">
+        {eyebrow}
+      </p>
+    )}
+    <h1 class:list={["font-rob font-black leading-[60px] lg:leading-[105px] text-[60px] lg:text-[105px] uppercase", eyebrow ? "mt-6" : ""]}>
+      {title}
+    </h1>
+    {description && (
+      <p class="mt-6 font-sans text-[18px] lg:text-[20px] leading-relaxed max-w-2xl mx-auto opacity-90">
+        {description}
+      </p>
+    )}
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+      {primaryCTA && (
+        <a href={primaryCTA.link} class="inline-flex items-center justify-center w-[300px] h-20 rounded-md font-mont font-bold text-[25px] btn-yellow">
+          {primaryCTA.text}
+        </a>
+      )}
+      {secondaryCTA && (
+        <a href={secondaryCTA.link} class="inline-flex items-center justify-center px-10 h-20 rounded-md font-mont font-bold text-[20px] btn-black">
+          {secondaryCTA.text}
+        </a>
+      )}
     </div>
   </div>
 
-  {/* Optional slot for additional content below hero */}
   <slot />
 </section>
-
-<style>
-  /* Ensure text is readable on all backgrounds */
-  h1,
-  p {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-</style>

@@ -1,0 +1,56 @@
+---
+import type { BaseVariantProps } from "../ContentRenderer.types";
+
+interface Props extends BaseVariantProps {}
+const { items = [], title } = Astro.props as Props;
+
+function imgSrc(raw: any): string | undefined {
+  if (!raw) return undefined;
+  if (typeof raw === "string") return raw;
+  if (raw.src) return typeof raw.src === "string" ? raw.src : (raw.src?.src ?? undefined);
+  return undefined;
+}
+---
+
+<section class="relative py-16 lg:py-[50px]" style="background:url('/assets/projects-bg.jpg') center/cover no-repeat #000;">
+  <div class="absolute inset-0 bg-black/80"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12">
+    {title && (
+      <h2 class="font-mont font-bold text-center text-[36px] lg:text-[45px] leading-[1.1] lg:leading-[67.5px] text-white">{title}</h2>
+    )}
+    <div class="mt-12 grid gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item, i) => {
+        const before = imgSrc((item as any).beforeImage);
+        const after  = imgSrc((item as any).afterImage);
+        const isLast = i === items.length - 1;
+        return (
+          <article class:list={["bg-white overflow-hidden", isLast && items.length % 3 !== 0 ? "sm:col-span-2 lg:col-span-1" : ""]} style="box-shadow:0 0 10px 0 rgba(0,0,0,0.5)">
+            {before && (
+              <div class="relative aspect-[413/225] bg-neutral-200">
+                <img src={before} alt="Before" class="w-full h-full object-cover"/>
+                <span class="absolute top-0 left-0 bg-primary text-black font-rob font-medium text-[28px] lg:text-[31px] px-5 py-1">Before</span>
+              </div>
+            )}
+            {after && (
+              <div class="relative aspect-[413/225] bg-neutral-200">
+                <img src={after} alt="After" class="w-full h-full object-cover"/>
+                <span class="absolute bottom-0 right-0 bg-primary text-black font-rob font-medium text-[28px] lg:text-[30px] px-5 py-1">After</span>
+              </div>
+            )}
+            <div class="px-6 pt-8 pb-10 text-center">
+              <h3 class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333]">{item.title}</h3>
+              {(item as any).location && (
+                <p class="mt-1 font-rob text-[16px] text-[#333]">{(item as any).location}</p>
+              )}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    <div class="mt-12 flex justify-center">
+      <a href="/projects" class="btn-yellow inline-flex items-center justify-center w-[209px] lg:w-[244px] h-[70px] rounded-md font-sans font-medium text-[20px]">
+        See More
+      </a>
+    </div>
+  </div>
+</section>

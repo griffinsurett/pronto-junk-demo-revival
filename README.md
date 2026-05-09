@@ -17,6 +17,7 @@ Greastro extends Astro's content collections with a powerful, database-like quer
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
 - [Advanced Features](#advanced-features)
+- [Robots and LLM Discovery Files](#robots-and-llm-discovery-files)
 - [User Preferences System](#user-preferences-system)
 - [Performance Optimizations](#performance-optimizations)
 - [Scripts](#scripts)
@@ -78,6 +79,8 @@ const posts = await query('blog')
 ### 🔍 SEO & Analytics
 - **Comprehensive SEO** with Open Graph, Twitter Cards, and JSON-LD
 - **Automatic metadata** from content frontmatter
+- **Generated `robots.txt`, `llms.txt`, and `llms-full.txt`** at build time
+- **Per-page crawler and LLM controls** via `robots`, `seo.robots`, and `llms` frontmatter
 - **Image optimization** with Astro's image service
 - **Structured data** for rich search results
 - **Cookie consent** with GDPR/CCPA compliance
@@ -245,6 +248,7 @@ src/
 │   ├── icons/                # Build-time icon map generation
 │   ├── partytown/            # Conditional Partytown integration
 │   ├── preferences/          # Consent/language/accessibility systems
+│   ├── robots-llms/          # robots.txt + llms.txt + llms-full.txt generation
 │   └── scroll-animations/    # Observer + plugin registry
 ├── layouts/
 │   ├── BaseLayout.astro      # Root HTML layout
@@ -307,6 +311,26 @@ export const siteData = {
   domain: SITE_DOMAIN,
   url: SITE_URL,
 };
+```
+
+Greastro also ships with a build-time `robots-llms` integration in `astro.config.mjs`:
+```typescript
+import robotsLlmsIntegration from './src/integrations/robots-llms/robots-llms.integration.ts';
+
+export default defineConfig({
+  integrations: [
+    robotsLlmsIntegration(),
+  ],
+});
+```
+
+Optional crawler controls:
+```typescript
+robotsLlmsIntegration({
+  disallow: ['/admin', '/staging'],
+  blockBots: ['GPTBot', 'CCBot'],
+  blockQueryUrls: true,
+});
 ```
 
 ### Environment Variables
@@ -438,6 +462,51 @@ const { entries, title, description, customProp } = Astro.props;
 - **SocialMediaVariant**: Social media icons
 - **MenuVariant**: Navigation menu
 - **LinkTreeVariant**: Link-aggregation cards for `/links`
+
+## Robots and LLM Discovery Files
+
+Greastro generates `robots.txt`, `llms.txt`, and `llms-full.txt` automatically during `npm run build`.
+
+- `robots.txt` includes the sitemap, blocks `/404` by default, and can also block query-string URLs.
+- `llms.txt` is a compact Markdown index of public pages grouped by section.
+- `llms-full.txt` is a long-form export with collection summaries and item content for LLM consumption.
+
+These files are built from the SEO manifest written by [`src/layouts/SEO.astro`](/Users/griffinsurett/coding/2025-Website-Projects/2026/greastro/src/layouts/SEO.astro:1), so pages only appear when they render through the standard layout/SEO flow.
+
+### Per-page Controls
+
+Use `robots` or `seo.robots` to control crawler directives:
+```yaml
+---
+title: "Private Landing Page"
+seo:
+  robots: "noindex, nofollow"
+---
+```
+
+Use `llms` frontmatter to opt collections or items in or out of the generated LLM indexes:
+```yaml
+---
+title: "Blog"
+llms:
+  addToLLMs: true
+  itemsAddToLLMs: false
+---
+```
+
+```yaml
+---
+title: "Case Study"
+llms:
+  addToLLMs: false
+---
+```
+
+Rules:
+- Pages with `noindex` in their robots directives are excluded from `llms.txt` and `llms-full.txt`.
+- `addToLLMs` defaults to `true` unless explicitly disabled.
+- Collection `_meta.mdx` files can control both the collection page and all items through `llms.addToLLMs` and `llms.itemsAddToLLMs`.
+- Individual items can override collection defaults with their own `llms.addToLLMs`.
 
 ## User Preferences System
 

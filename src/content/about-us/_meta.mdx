@@ -1,19 +1,14 @@
 ---
 title: "About Us"
-description: "We are dedicated to providing the best service possible. Learn more about our mission, vision, and team."
+description: "We Do The Work So You Don't Have To"
 hasPage: true
 itemsHasPage: false
 redirectFrom:
   - "/about"
   - "/aboutus"
 addToMenu:
+  - menu: "main-menu"
+    title: "Who Are We"
+    order: 2
   - menu: "footer-menu"
 ---
-import ContentRenderer from "@/components/ContentRenderer/ContentRenderer.astro";
-import { query } from "@/utils/query";
-
-<ContentRenderer
-  query={query("about-us")}
-  variant="AccordionVariant"
-  columns={1}
-/>

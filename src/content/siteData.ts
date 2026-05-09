@@ -2,17 +2,19 @@
 import { SITE_DOMAIN, SITE_URL } from "./siteDomain.js";
 
 export const siteData = {
-  title: "Greastro",
-  legalName: "Greastro LLC",
-  tagline: "Build fast. Stay typesafe. Ship with confidence.",
-  description: "Finest Typesafe Static Sites with Astro, dynamically static with content collections.",
+  title: "Pronto Junk Removal",
+  legalName: "Pronto Junk Removal LLC",
+  tagline: "Serving Middlesex County, NJ And More",
+  description: "Fast, reliable junk removal based in Woodbridge, NJ. We handle rummage, cleanouts, demolition debris, and more — so you don't have to.",
   domain: SITE_DOMAIN,
   url: SITE_URL,
-  location: "New Jersey, USA",
-  address: "123 Main St, Springfield, NJ 07081",
+  location: "Woodbridge, NJ",
+  address: "Woodbridge Township, NJ 07095",
+  phone: "732-710-5405",
+  phoneHref: "tel:+17327105405",
 };
 
 export const ctaData = {
-  text: "Get Started with Greastro",
-  link: "/contact-us",
+  text: "Get a Free Quote",
+  link: "#contact",
 }

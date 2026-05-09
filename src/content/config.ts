@@ -18,7 +18,7 @@
  */
 import { file } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
-import { baseSchema, MenuSchema, MenuItemFields, refSchema } from "./schema";
+import { baseSchema, MenuSchema, MenuItemFields, refSchema, imageInputSchema } from "./schema";
 import { MenuItemsLoader } from "@/utils/loaders/MenuItemsLoader";
 
 export const collections = {
@@ -116,10 +116,13 @@ export const collections = {
   "projects": defineCollection({
     schema: ({ image }) =>
       baseSchema({ image }).extend({
-        client: z.string(),
-        projectUrl: z.string().url().optional(),
+        client:       z.string(),
+        location:     z.string().optional(),
+        category:     z.string(),
+        beforeImage:  imageInputSchema({ image }),
+        afterImage:   imageInputSchema({ image }),
+        projectUrl:   z.string().url().optional(),
         technologies: z.array(z.string()).default([]),
-        category: z.string(),
       }),
   }),
 
@@ -128,5 +131,20 @@ export const collections = {
       baseSchema({ image }).extend({
         category: z.string().optional(),
       }),
+  }),
+
+  "benefits": defineCollection({
+    schema: ({ image }) =>
+      baseSchema({ image }),
+  }),
+
+  "locations": defineCollection({
+    loader: file("src/content/locations/locations.json"),
+    schema: ({ image }) => baseSchema({ image }),
+  }),
+
+  "gallery": defineCollection({
+    schema: ({ image }) =>
+      baseSchema({ image }),
   }),
 };

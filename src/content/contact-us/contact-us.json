@@ -2,15 +2,15 @@
   {
     "id": "phone",
     "title": "Call Us",
-    "description": "7329391309",
+    "description": "732-710-5405",
     "icon": "lu:phone",
     "tags": ["phone"],
     "linkPrefix": "tel:"
   },
   {
-    "id": "email",
-    "title": "Email Us",
-    "description": "griffinswebservices@gmail.com",
+    "id": "quote",
+    "title": "Get a Free Quote",
+    "description": "Fill out our form and we'll get back to you fast.",
     "icon": "lu:mail",
     "tags": ["email"],
     "linkPrefix": "mailto:"

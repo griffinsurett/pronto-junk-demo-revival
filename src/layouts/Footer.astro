@@ -1,58 +1,57 @@
 ---
-// src/layouts/Footer.astro
-/**
- * Footer Component
- *
- * Site-wide footer with:
- * - Copyright notice
- * - Social media links
- * - Legal links (Privacy Policy, Cookie Policy)
- * - Cookie preferences button (client-side)
- * - Reading preferences button (client-side)
- */
 import { siteData } from "@/content/siteData";
-import ContentRenderer from "@/components/ContentRenderer/ContentRenderer.astro";
-import { query, related } from "@/utils/query";
-import PreferencesLayout from "./PreferencesLayout.astro";
+import CookiePreferencesButton from "@/integrations/preferences/consent/ui/CookiePreferencesButton";
+import AccessibilityButton from "@/integrations/preferences/accessibility/ui/AccessibilityButton";
+
+const year = new Date().getFullYear();
 ---
 
-<footer class="bg-text text-bg mt-auto">
-  <div class="mx-auto">
-    <div class="flex flex-col justify-between items-center gap-6 py-4 w-full">
-      {/* Footer navigation links */}
-      <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
-        <ContentRenderer
-          query={related("menu-items", "menu", "footer-menu")}
-          variant="ListVariant"
-          className="text-bg flex"
-        />
+<footer>
+  <!-- CTA strip + footer bottom, seamless gradient into black -->
+  <div id="contact" class="relative" style="background: linear-gradient(180deg,#FFA800 0%, #000 100%);">
+    <div class="max-w-[1200px] mx-auto px-6 py-14 lg:py-20 text-center">
+      <h2 class="font-mont font-bold text-[24px] lg:text-[25px] text-black">Want Junk Removed?</h2>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contact" class="inline-flex items-center justify-center px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-yellow">
+          Get Quote
+        </a>
+        <a href={siteData.phoneHref} class="inline-flex items-center justify-center gap-3 px-10 h-[50px] rounded-sm font-sans font-medium text-[20px] btn-black">
+          <svg width="14" height="14" viewBox="0 0 13 13" fill="currentColor">
+            <path d="M12.528.625 9.887.016a.751.751 0 0 0-.698.352L7.97 3.212a.74.74 0 0 0 .176.711l1.538 1.26a11.27 11.27 0 0 1-4.5 4.499l-1.258-1.539a.745.745 0 0 0-.711-.175L.371 9.187a.747.747 0 0 0-.356.7l.61 2.641A.75.75 0 0 0 1.219 13C7.722 13 13 7.732 13 1.219A.75.75 0 0 0 12.528.625z"/>
+          </svg>
+          Call Us
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Black footer bottom -->
+  <div class="bg-black text-white" style="margin-top:-1px;">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-[81px] pt-14 pb-8 text-center">
+      <img src="/assets/logo.png" alt={siteData.title} class="mx-auto w-[160px] h-[160px] lg:w-[228px] lg:h-[228px] object-contain"/>
+      <h3 class="mt-6 font-mont font-bold text-[24px] lg:text-[25px] text-white">{siteData.title}</h3>
+
+      <!-- Divider -->
+      <div class="mt-8 border-t border-white/10"></div>
+
+      <!-- Legal + preferences + copyright all under divider -->
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mont text-[14px] lg:text-[15px] text-white/70">
+        <a href="/legal/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a>
+        <span class="text-white/30">·</span>
+        <a href="/legal/terms-of-service" class="hover:text-white transition-colors">Terms of Service</a>
+        <span class="text-white/30">·</span>
+        <a href="/legal/cookie-policy" class="hover:text-white transition-colors">Cookie Policy</a>
+        <span class="text-white/30">·</span>
+        <CookiePreferencesButton client:visible className="link-inherit font-mont text-[14px] lg:text-[15px] text-white/70 hover:text-white" />
+        <span class="text-white/30">·</span>
+        <AccessibilityButton client:idle className="link-inherit font-mont text-[14px] lg:text-[15px] text-white/70 hover:text-white" />
       </div>
 
-      {/* Legal and privacy links */}
-      <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
-        <ContentRenderer
-          query={query("legal")}
-          variant="ListVariant"
-          className="text-bg flex"
-        />
-
-        <PreferencesLayout />
+      <!-- Copyright -->
+      <div class="mt-4 flex flex-col lg:flex-row gap-2 lg:gap-0 lg:justify-between items-center font-mont text-[14px] lg:text-[15px] text-white/85">
+        <span>&copy;{year} PRONTO Junk Removal. All Rights Reserved.</span>
+        <a href="https://griffinswebservices.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Built By Griffin's Web Services</a>
       </div>
-
-      {/* Social media icons */}
-      <ContentRenderer
-        query={query("social-media")}
-        variant="SocialMediaVariant"
-        size="md"
-        alignment="left"
-        className="text-bg"
-      />
-
-      {/* Copyright notice */}
-      <p class="text-bg text-sm">
-        &copy; {new Date().getFullYear()}
-        {siteData.legalName}. All rights reserved.
-      </p>
     </div>
   </div>
 </footer>

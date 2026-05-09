@@ -1,0 +1,95 @@
+---
+import { roots, children } from "@/utils/query/snippets";
+
+const counties = await roots("locations").all();
+
+const countyRows = await Promise.all(
+  counties.map(async (county) => {
+    const towns = await children("locations", county.id).all();
+    return { county, towns };
+  })
+);
+---
+
+<section id="locations" class="py-16 lg:py-[70px]">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+    <h2 class="font-rob font-bold text-center text-[28px] lg:text-[32px] leading-[1.1] text-[#333]">
+      We are Located In Woodbridge Township
+    </h2>
+
+    <div class="mt-10 grid gap-10 lg:grid-cols-2 lg:items-start">
+
+      <!-- County accordions -->
+      <div class="space-y-2">
+        <h3 class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333]">Our Service Locations</h3>
+        <div class="mt-4 space-y-1">
+          {countyRows.map(({ county, towns }) => (
+            <details>
+              <summary class="flex items-center gap-3 py-1 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                <span class="accordion-bullet chev shrink-0">
+                  <svg width="9" height="5" viewBox="0 0 9 5" fill="#000">
+                    <path d="M8.126 4.941H.587C.065 4.941-.196 4.31.173 3.941L3.942.172a.585.585 0 0 1 .829 0l3.769 3.769c.369.369.108 1-.414 1z"/>
+                  </svg>
+                </span>
+                <span class="font-rob font-bold text-[16px] text-black">{county.data.title}</span>
+              </summary>
+              {towns.length > 0 && (
+                <div class="pl-[40px] pb-3 pt-1">
+                  <ul class="grid grid-cols-2 gap-x-4 gap-y-1">
+                    {towns.map((town) => (
+                      <li class="font-sans text-[15px] leading-[1.6] text-[#555]">{town.data.title}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <!-- Map placeholder -->
+      <div class="relative w-full h-[300px] rounded-sm overflow-hidden border border-black/10" style="background:#E5E3DF">
+        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 537 300" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 90 L537 70" stroke="#fff" stroke-width="6"/>
+          <path d="M0 180 L537 200" stroke="#fff" stroke-width="6"/>
+          <path d="M120 0 L150 300" stroke="#fff" stroke-width="6"/>
+          <path d="M380 0 L400 300" stroke="#fff" stroke-width="6"/>
+          <path d="M0 250 L537 240" stroke="#fff" stroke-width="3"/>
+          <path d="M260 0 L270 300" stroke="#fff" stroke-width="3"/>
+          <path d="M0 30 L537 20" stroke="#cfd8e0" stroke-width="2"/>
+        </svg>
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full">
+          <svg width="34" height="44" viewBox="0 0 24 32" fill="#E94235">
+            <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 20 12 20s12-11 12-20C24 5.4 18.6 0 12 0z"/>
+            <circle cx="12" cy="12" r="4" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="absolute top-2.5 left-2.5 bg-white rounded-sm px-3 py-2 max-w-[200px]" style="box-shadow:0 1px 4px -1px rgba(0,0,0,0.3)">
+          <div class="font-rob font-medium text-[14px] text-black">Middlesex County</div>
+          <div class="font-rob text-[12px] text-[#5b5b5b]">New Jersey</div>
+        </div>
+        <div class="absolute bottom-3 right-3 bg-white rounded-sm w-10 overflow-hidden" style="box-shadow:0 1px 4px -1px rgba(0,0,0,0.3)">
+          <button class="grid w-full h-10 place-items-center text-[#666] hover:bg-black/5" aria-label="Zoom in">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M18 7h-7V0H7v7H0v4h7v7h4v-7h7z"/></svg>
+          </button>
+          <div class="h-px mx-1.5 bg-[#e6e6e6]"></div>
+          <button class="grid w-full h-10 place-items-center text-[#666] hover:bg-black/5" aria-label="Zoom out">
+            <svg width="18" height="4" viewBox="0 0 18 4" fill="currentColor"><path d="M0 0h18v4H0z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outside of this area? -->
+    <div class="mt-16 text-center">
+      <h3 class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333]">Outside Of This Area?</h3>
+      <p class="mt-3 font-sans text-[18px] leading-[27px] max-w-3xl mx-auto">
+        We still would love to work with you, just contact us with your location, and details of the job you want and we will be happy to help you!
+      </p>
+      <a href="#contact"
+        class="btn-yellow mt-6 inline-flex items-center justify-center w-[176px] h-[50px] rounded-sm font-sans font-medium text-[20px]">
+        Get Quote
+      </a>
+    </div>
+  </div>
+</section>

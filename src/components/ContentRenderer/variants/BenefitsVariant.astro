@@ -1,0 +1,30 @@
+---
+import type { BaseVariantProps } from "../ContentRenderer.types";
+
+interface Props extends BaseVariantProps {}
+const { items = [], title } = Astro.props as Props;
+
+const icons: Record<number, string> = {
+  0: `<svg width="49" height="65" viewBox="0 0 49 65" fill="#000" aria-hidden="true"><path d="M24.5 0 0 11v18.5C0 47 10.5 60.5 24.5 65 38.5 60.5 49 47 49 29.5V11L24.5 0zm-3 47L9 34.5 13 30l8.5 8.5L36 24l4 4-18.5 19z"/></svg>`,
+  1: `<svg width="65" height="46" viewBox="0 0 65 46" fill="#000" aria-hidden="true"><path d="M5 8h32v6H5zM0 20h44v6H0zM10 32h32v6H10z"/><path d="M50 6l15 17-15 17v-9H42V15h8z"/></svg>`,
+};
+---
+
+<section class="bg-black text-white py-16 lg:py-[110px]">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+    {title && (
+      <h2 class="font-mont font-bold text-center text-[36px] lg:text-[45px] leading-[1.15] lg:leading-[67.5px] text-white">
+        {title}
+      </h2>
+    )}
+    <div class="mt-12 grid gap-6 lg:gap-[60px] lg:grid-cols-2">
+      {items.map((item, i) => (
+        <div class="w-full bg-primary border-2 border-black text-black p-8 lg:p-12 text-center">
+          <div class="mx-auto w-[65px] h-[65px] grid place-items-center" set:html={icons[i] ?? icons[0]} />
+          <h3 class="mt-4 font-mont font-bold text-[25px] leading-[37.5px]">{item.title}</h3>
+          <p class="mt-2 font-rob text-[16px] leading-6 max-w-md mx-auto">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

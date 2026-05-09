@@ -2,10 +2,10 @@
   {
     "id": "home",
     "title": "Home",
-    "description": "Homepage link",
+    "description": "Homepage",
     "url": "/",
-    "order": 0,
+    "order": 1,
     "openInNewTab": false,
-    "menu": ["main-menu", "links-menu", "footer-menu"]
+    "menu": ["main-menu", "footer-menu"]
   }
 ]

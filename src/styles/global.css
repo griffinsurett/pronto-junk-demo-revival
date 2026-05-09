@@ -1,4 +1,5 @@
 /* src/styles/global.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Raleway:wght@400;500&family=Roboto:wght@400;500;700;900&display=swap');
 @import "tailwindcss";
 
 /* Tell Tailwind to scan integration components for class usage */
@@ -12,16 +13,21 @@
 @import "@/styles/menu.css";
 
 @theme {
-  /* ───── PRIMARY – change ONLY this one line for the brand ───── */
-  --color-primary: var(--color-blue-500);   /* your main brand color */
-  /* ───── ACCENT – secondary / interactive ───── */
-  --color-accent: var(--color-purple-700);  /* complementary accent color */
+  /* ───── PRIMARY – Pronto brand yellow #F6AD00 ───── */
+  --color-primary: oklch(78% 0.17 70);
+  /* ───── ACCENT – Pronto secondary orange #FFA800 ───── */
+  --color-accent: oklch(73% 0.18 55);
 
   /* ───── Neutrals ───── */
-  --color-text:         oklch(18% 0.03 260);   /* almost black */
-  --color-heading:      oklch(14% 0.03 260);   /* slightly darker */
-  --color-bg:           oklch(99.5% 0.004 260); /* off-white */
-  --color-surface:      oklch(97.5% 0.006 260); /* cards, nav, modals */
+  --color-text:         oklch(14% 0.02 260);   /* #111111 */
+  --color-heading:      oklch(10% 0.02 260);
+  --color-bg:           oklch(100% 0 0);        /* pure white */
+  --color-surface:      oklch(97% 0.004 260);
+
+  /* ───── Pronto fonts ───── */
+  --font-sans: 'Raleway', system-ui, sans-serif;
+  --font-mont: 'Montserrat', system-ui, sans-serif;
+  --font-rob:  'Roboto', system-ui, sans-serif;
 
   /* color helpers */
   --color-primary-50:   oklch(from var(--color-primary) calc(l + 0.40) c h);
@@ -50,6 +56,7 @@
 }
 
 body {
+  font-family: var(--font-sans);
   @apply overflow-x-hidden;
 }
 
@@ -92,6 +99,9 @@ body {
     @apply focus:outline-none focus:ring-0 focus:ring-offset-0;
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
   }
+  .link-base.link-inherit {
+    @apply text-inherit hover:text-inherit hover:no-underline hover:opacity-100;
+  }
 
   /* Link sizes (no padding) */
   .link-sm {
@@ -105,6 +115,51 @@ body {
   .link-lg {
     @apply text-lg;
   }
+
+  /* ───── Pronto branded buttons ───── */
+  .btn-yellow {
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    border: 2px solid #000;
+    color: #000;
+    font-family: var(--font-mont);
+    font-weight: 700;
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+  .btn-yellow:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+  }
+
+  .btn-black {
+    background: #000;
+    border: 2px solid #000;
+    color: var(--color-primary);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+  .btn-black:hover {
+    background: #1a1a1a;
+    transform: translateY(-1px);
+  }
+
+  /* Yellow circle bullet used in service/location lists */
+  .accordion-bullet {
+    width: 25px;
+    height: 25px;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 25px;
+  }
+
+  /* Rotating chevron for FAQ details[open] */
+  .chev { transition: transform 0.2s ease; }
+  details[open] .chev { transform: rotate(180deg); }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
 }
 
 @layer utilities {

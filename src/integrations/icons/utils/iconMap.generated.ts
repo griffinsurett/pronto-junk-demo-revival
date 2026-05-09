@@ -2,14 +2,15 @@
 // Do not edit manually. Run "npm run generate:icons" (or node src/integrations/icons/utils/generate-icon-map.mjs) to regenerate.
 
 import type { IconType } from 'react-icons';
-import { LuArrowRight, LuBookOpen, LuChevronRight, LuContact, LuGithub, LuGlobe, LuImage, LuLinkedin, LuMail, LuPhone, LuSettings, LuTwitter } from 'react-icons/lu';
-import { FaBullhorn, FaCode } from 'react-icons/fa';
-import { SiFacebook } from 'react-icons/si';
-import { FaArrowsUpDownLeftRight, FaBullseye, FaClockRotateLeft, FaCompass, FaEye, FaFeather, FaFileLines, FaHeadset, FaLayerGroup, FaLifeRing, FaLink, FaPalette, FaRobot, FaRotateLeft, FaScaleBalanced, FaShieldHalved, FaUniversalAccess, FaWandMagicSparkles, FaXmark } from 'react-icons/fa6';
+import { LuArrowRight, LuBookOpen, LuChevronRight, LuContact, LuGlobe, LuImage, LuMail, LuPhone, LuSettings } from 'react-icons/lu';
+import { FaArrowsUpDownLeftRight, FaBullseye, FaChevronLeft, FaChevronRight, FaClockRotateLeft, FaCompass, FaEye, FaFeather, FaFileLines, FaHeadset, FaLayerGroup, FaLifeRing, FaLink, FaPalette, FaQuoteLeft, FaRobot, FaRotateLeft, FaScaleBalanced, FaShieldHalved, FaStar, FaUniversalAccess, FaWandMagicSparkles, FaXmark } from 'react-icons/fa6';
+import { SiFacebook, SiInstagram } from 'react-icons/si';
 
 export const iconMap = {
   'fa6:arrows-up-down-left-right': FaArrowsUpDownLeftRight,
   'fa6:bullseye': FaBullseye,
+  'fa6:chevron-left': FaChevronLeft,
+  'fa6:chevron-right': FaChevronRight,
   'fa6:clock-rotate-left': FaClockRotateLeft,
   'fa6:compass': FaCompass,
   'fa6:eye': FaEye,
@@ -20,28 +21,26 @@ export const iconMap = {
   'fa6:life-ring': FaLifeRing,
   'fa6:link': FaLink,
   'fa6:palette': FaPalette,
+  'fa6:quote-left': FaQuoteLeft,
   'fa6:robot': FaRobot,
   'fa6:rotate-left': FaRotateLeft,
   'fa6:scale-balanced': FaScaleBalanced,
   'fa6:shield-halved': FaShieldHalved,
+  'fa6:star': FaStar,
   'fa6:universal-access': FaUniversalAccess,
   'fa6:wand-magic-sparkles': FaWandMagicSparkles,
   'fa6:xmark': FaXmark,
-  'fa:bullhorn': FaBullhorn,
-  'fa:code': FaCode,
   'lu:arrow-right': LuArrowRight,
   'lu:book-open': LuBookOpen,
   'lu:chevron-right': LuChevronRight,
   'lu:contact': LuContact,
-  'lu:github': LuGithub,
   'lu:globe': LuGlobe,
   'lu:image': LuImage,
-  'lu:linkedin': LuLinkedin,
   'lu:mail': LuMail,
   'lu:phone': LuPhone,
   'lu:settings': LuSettings,
-  'lu:twitter': LuTwitter,
   'si:facebook': SiFacebook,
+  'si:instagram': SiInstagram,
 } satisfies Record<string, IconType>;
 
 export type IconKey = keyof typeof iconMap;

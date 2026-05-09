@@ -1,0 +1,24 @@
+---
+import type { BaseVariantProps } from "../ContentRenderer.types";
+import GalleryCarousel from "@/components/GalleryCarousel";
+
+interface Props extends BaseVariantProps {}
+const { items = [], title, description } = Astro.props as Props;
+
+function imgSrc(raw: any): string | undefined {
+  if (!raw) return undefined;
+  if (typeof raw === "string") return raw;
+  if (raw.src) return typeof raw.src === "string" ? raw.src : (raw.src?.src ?? undefined);
+  return undefined;
+}
+
+const galleryItems = items
+  .map((item) => {
+    const src = imgSrc((item as any).featuredImage);
+    if (!src) return null;
+    return { src, alt: (item as any).featuredImage?.alt ?? item.title ?? "" };
+  })
+  .filter(Boolean) as { src: string; alt: string }[];
+---
+
+<GalleryCarousel items={galleryItems} title={title} description={description} client:visible />

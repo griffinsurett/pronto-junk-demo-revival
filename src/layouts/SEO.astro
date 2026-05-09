@@ -18,7 +18,8 @@
 
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import defaultOGImage from "@/assets/astro.svg";
+import siteLogo from "@/assets/logo.png";
+import defaultOGImage from "@/assets/hero.jpg";
 import { siteData } from "@/content/siteData";
 import { getImageUrl } from "@/utils/images";
 import type { ImageInput, SEOData } from "@/content/schema";
@@ -112,7 +113,7 @@ const structuredData = {
     "url": siteData.url,
     "logo": {
       "@type": "ImageObject",
-      "url": makeAbsolute(defaultOGImage.src),
+      "url": makeAbsolute(siteLogo.src),
       "width": 60,
       "height": 60
     }
