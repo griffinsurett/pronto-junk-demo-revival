@@ -37,8 +37,8 @@ const {
 
 const { title: pageTitle, description: pageDescription } = seoProps;
 
-// Use featuredImage from _meta.mdx if provided, otherwise undefined (will use default)
 const heroImage = collectionMeta.featuredImage;
+const indexVariant = collectionMeta?.indexVariant ?? "GridVariant";
 ---
 
 <BaseLayout {...seoProps}>
@@ -60,7 +60,7 @@ const heroImage = collectionMeta.featuredImage;
           <Content />
         ) : (
           /* Default: Grid of collection items */
-          <ContentRenderer query={query(collectionName)} variant="GridVariant" />
+          <ContentRenderer query={query(collectionName)} variant={indexVariant} />
         )
       }
     </div>

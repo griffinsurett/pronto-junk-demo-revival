@@ -49,9 +49,9 @@ const columnClasses = {
 
   {
     items.length > 0 && (
-      <ul class={`grid ${columnClasses[columns]} gap-8 list-none`}>
+      <ul class={`grid ${columnClasses[columns]} gap-8 list-none items-stretch`}>
         {items.map((item) => (
-          <li>
+          <li class="flex">
             <FeatureCard {...item} />
           </li>
         ))}

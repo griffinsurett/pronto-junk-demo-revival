@@ -79,15 +79,13 @@ const backgroundMedia = {
           <span class="text-white font-medium" aria-current="page">{title}</span>
         </nav>
 
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg"
-        >
+        <h1 class="font-rob font-black uppercase text-[48px] md:text-[64px] lg:text-[80px] leading-tight mb-6 drop-shadow-lg">
           {title}
         </h1>
 
         {
           description && (
-            <p class="text-xl md:text-2xl mb-8 opacity-95 drop-shadow-md leading-relaxed">
+            <p class="mt-4 font-mont font-bold text-[18px] lg:text-[20px] leading-relaxed opacity-95 drop-shadow-md">
               {description}
             </p>
           )
@@ -167,10 +165,3 @@ const backgroundMedia = {
   <slot />
 </section>
 
-<style>
-  /* Ensure text is readable on all backgrounds */
-  h1,
-  p {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-</style>
