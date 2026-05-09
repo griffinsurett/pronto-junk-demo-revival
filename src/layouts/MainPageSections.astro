@@ -1,0 +1,49 @@
+---
+import ContentRenderer from "@/components/ContentRenderer/ContentRenderer.astro";
+import AboutSection from "@/components/AboutSection.astro";
+import LocationsSection from "@/components/LocationsSection.astro";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
+import { query, sortByOrder } from "@/utils/query";
+
+interface Props { isHomepage?: boolean; }
+const { isHomepage = false } = Astro.props;
+
+const testimonialEntries = await query("testimonials").orderBy(sortByOrder()).all();
+const testimonials = testimonialEntries.map((e) => ({
+  quote: e.data.description ?? "",
+  name: e.data.title,
+  role: (e.data as any).role ?? "",
+  rating: (e.data as any).rating ?? 5,
+}));
+---
+
+<AboutSection isHomepage={isHomepage} />
+
+<ContentRenderer
+  query={query("benefits").orderBy(sortByOrder())}
+  variant="BenefitsVariant"
+  title="Benefits of Choosing Pronto"
+/>
+
+{testimonials.length > 0 && (
+  <TestimonialCarousel testimonials={testimonials} client:visible />
+)}
+
+<ContentRenderer
+  query={query("projects").orderBy(sortByOrder())}
+  variant="ProjectsBeforeAfterVariant"
+  title="Our Projects"
+/>
+
+{isHomepage && <LocationsSection />}
+
+<ContentRenderer
+  query={query("faq").orderBy(sortByOrder())}
+  variant="FaqVariant"
+  title="Frequently Asked Questions"
+/>
+
+<ContentRenderer
+  query={query("gallery").orderBy(sortByOrder())}
+  variant="GalleryCarouselVariant"
+/>

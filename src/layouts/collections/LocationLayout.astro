@@ -3,15 +3,21 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import FrontPageHero from "@/layouts/FrontPageHero.astro";
 import MainPageSections from "@/layouts/MainPageSections.astro";
 import { siteData } from "@/content/siteData";
+
+const { entry } = Astro.props;
+const locationName = entry?.data?.title ?? "Your Area";
 ---
 
-<BaseLayout title="Home" description={siteData.description}>
+<BaseLayout
+  title={`Junk Removal in ${locationName}`}
+  description={`Fast, reliable junk removal serving ${locationName}, NJ. Call Pronto Junk Removal for same-day service.`}
+>
   <main class="flex-1">
     <FrontPageHero
-      eyebrow={siteData.tagline}
+      eyebrow={`Serving ${locationName}`}
       title={siteData.title}
       primaryCTA={{ text: "Get Quote", link: "#contact" }}
     />
-    <MainPageSections isHomepage={true} />
+    <MainPageSections />
   </main>
 </BaseLayout>

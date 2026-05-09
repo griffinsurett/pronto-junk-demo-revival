@@ -1,6 +1,9 @@
 ---
 import ContentRenderer from "@/components/ContentRenderer/ContentRenderer.astro";
 import { query, sortByOrder } from "@/utils/query";
+
+interface Props { isHomepage?: boolean; }
+const { isHomepage = false } = Astro.props;
 ---
 
 <section id="about" class="py-16 lg:py-[70px]">
@@ -17,7 +20,7 @@ import { query, sortByOrder } from "@/utils/query";
           Founded By Teens on a<br/>Mission for Success...
         </h3>
         <p class="mt-4 font-sans text-[18px] leading-[27px] text-black">
-          Pronto Junk Removal, founded in 2022 and based in Woodbridge, NJ, is a business operated by 18 year old teenager Anthony Gonzalez and his friends. We are committed to fast and efficient disposal and making space reclamation a hassle-free experience.
+          Pronto Junk Removal, founded in 2022{isHomepage ? " and based in Woodbridge, NJ," : ","} is a business operated by 18 year old teenager Anthony Gonzalez and his friends. We are committed to fast and efficient disposal and making space reclamation a hassle-free experience.
         </p>
 
         <div class="mt-8 overflow-hidden">
