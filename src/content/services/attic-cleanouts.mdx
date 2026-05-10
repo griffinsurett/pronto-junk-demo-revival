@@ -2,4 +2,20 @@
 title: "Attic Clean Outs"
 description: "Decades of stored items taking up your attic? Our crew removes it all safely — boxes, furniture, insulation debris, and old belongings."
 order: 4
+featuredImage:
+  src: "../../assets/atticthumb.jpg"
+  alt: "Packed attic full of boxes and old belongings"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import atticImg from "@/assets/atticthumb.jpg";
+import atticImg2 from "@/assets/atticthumb2.jpg";
+import houseImg from "@/assets/housethumb5.jpg";
+import teamImg from "@/assets/team2.jpg";
+
+<ServiceSection index={0} heading="The Space You've Been Ignoring" body="Attics collect things for decades. Holiday decorations, broken furniture, boxes of clothes, old documents, and random junk that never had another home. We go up there so you don't have to — and we bring it all down and haul it away." image={atticImg} />
+
+<ServiceSection index={1} heading="Prep for Insulation or Renovation" body="Upgrading your attic insulation? Adding HVAC? Converting the space? Contractors need it empty before they start. We clear the attic completely — sometimes in the same week you call — so your project timeline doesn't slip." image={atticImg2} />
+
+<ServiceSection index={2} heading="We Handle the Difficult Access" body="Attics are cramped, hot, and often accessible only through a narrow hatch. Our crew is experienced with difficult access points. We bring the right equipment, work safely, and get everything out without damaging ceilings, walls, or floors below." image={houseImg} />
+
+<ServiceSection index={3} heading="Everything Up There Goes" body="Old furniture that was hauled up once and never came down. Boxes of belongings from family members who've moved away. Holiday decorations, old electronics, broken appliances. It all comes down and leaves with us in a single visit." image={teamImg} />

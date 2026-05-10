@@ -1,0 +1,68 @@
+---
+// src/layouts/collections/ServiceLayout.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SecondaryHero from '@/layouts/SecondaryHero.astro';
+import ContentRenderer from '@/components/ContentRenderer/ContentRenderer.astro';
+import TestimonialCarousel from '@/components/TestimonialCarousel';
+import { query, sortByOrder } from '@/utils/query';
+import type { CollectionLayoutProps } from './types';
+
+const {
+  entry,
+  Content,
+  seoProps = {},
+} = Astro.props as CollectionLayoutProps;
+
+const data = entry?.data || {};
+
+const testimonialEntries = await query("testimonials").orderBy(sortByOrder()).all();
+const testimonials = testimonialEntries.map((e) => ({
+  quote: e.data.description ?? "",
+  name: e.data.title,
+  role: (e.data as any).role ?? "",
+  rating: (e.data as any).rating ?? 5,
+}));
+---
+
+<BaseLayout {...seoProps}>
+  <main class="flex-1">
+
+    {/* ── Hero ── */}
+    <SecondaryHero
+      eyebrow="Services"
+      title={data.title}
+      description={data.description}
+      image={data.featuredImage?.src ?? data.featuredImage ?? data.bannerImage?.src ?? data.bannerImage}
+      minHeight="65vh"
+    />
+
+    {/* ── MDX body — per-service content ── */}
+    {Content && (
+      <section class="py-14 lg:py-20 bg-white">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-12 flex flex-col gap-16 lg:gap-24">
+          <Content />
+        </div>
+      </section>
+    )}
+
+    {/* ── Before / After Projects ── */}
+    <ContentRenderer
+      query={query("projects").orderBy(sortByOrder())}
+      variant="ProjectsBeforeAfterVariant"
+      title="Our Work"
+    />
+
+    {/* ── Testimonials ── */}
+    {testimonials.length > 0 && (
+      <TestimonialCarousel testimonials={testimonials} client:visible />
+    )}
+
+    {/* ── FAQ ── */}
+    <ContentRenderer
+      query={query("faq").orderBy(sortByOrder())}
+      variant="FaqVariant"
+      title="Frequently Asked Questions"
+    />
+
+  </main>
+</BaseLayout>

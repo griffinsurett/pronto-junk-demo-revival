@@ -95,25 +95,21 @@ export default function GalleryCarousel({ items, title, description }: {
           </button>
         </div>
 
-        {/* One dot per image — active set = currently visible window */}
-        {items.length > spv && (
+        {maxIndex > 0 && (
           <nav className="mt-6 flex justify-center gap-2 px-6 lg:px-12" aria-label="Gallery pagination">
-            {items.map((_, i) => {
-              const active = i >= index && i < index + spv;
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => goTo(Math.min(i, maxIndex))}
-                  aria-label={`Go to image ${i + 1}`}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    active
-                      ? "bg-primary scale-[1.3]"
-                      : "bg-black/20 hover:bg-black/40"
-                  }`}
-                />
-              );
-            })}
+            {Array.from({ length: maxIndex + 1 }, (_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Go to image ${i + 1}`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  i === index
+                    ? "bg-primary scale-[1.3]"
+                    : "bg-black/20 hover:bg-black/40"
+                }`}
+              />
+            ))}
           </nav>
         )}
       </div>

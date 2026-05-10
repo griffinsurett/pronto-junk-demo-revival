@@ -2,4 +2,20 @@
 title: "Garbage Cleanouts"
 description: "Full garbage cleanouts for homes and businesses. We haul away accumulated waste of any volume so your property is clean and clear."
 order: 2
+featuredImage:
+  src: "../../assets/truckwcynders.jpg"
+  alt: "Truck loaded with cinder blocks and construction debris"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import truckImg from "@/assets/truckwstuff.jpg";
+import truckImg2 from "@/assets/truckwcynders.jpg";
+import commercialImg from "@/assets/commercialthumb1.jpg";
+import teamImg from "@/assets/team1.jpg";
+
+<ServiceSection index={0} heading="No Dumpster, No Waiting" body="Renting a dumpster means waiting for delivery, figuring out permits, filling it yourself, and scheduling a pickup. We skip all of that. Our crew shows up, loads everything, and it's gone the same day — at a price that's often less than a dumpster rental." image={truckImg} />
+
+<ServiceSection index={1} heading="Bulk Trash and Construction Debris" body="After a renovation, demo, or cleanout, the leftover debris piles up fast. Drywall, lumber, tile, concrete, scrap metal, insulation — we haul construction waste of all types. One truckload or several, we handle the volume." image={truckImg2} />
+
+<ServiceSection index={2} heading="Commercial Trash Removal" body="Offices, retail spaces, warehouses, and commercial properties generate trash that regular garbage service won't touch. We handle bulk commercial trash removal — desks, shelving, packaging materials, electronics, and general waste — on your schedule." image={commercialImg} />
+
+<ServiceSection index={3} heading="Responsible Disposal Every Time" body="We don't take shortcuts on disposal. Electronics go to certified recyclers. Metals get recycled. Usable items go to donation centers. Everything else goes to licensed disposal facilities. We take responsibility for what we haul — from your property to the end of the line." image={teamImg} />

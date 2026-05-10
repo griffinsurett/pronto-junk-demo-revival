@@ -2,4 +2,20 @@
 title: "Rummage Removal"
 description: "We clear out unwanted rummage from any space — garages, basements, attics, and more. Fast, hassle-free pickup so you can reclaim your space today."
 order: 1
+featuredImage:
+  src: "../../assets/truckwstuff.jpg"
+  alt: "Truck bed loaded with mixed junk and debris for removal"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import truckImg from "@/assets/truckwcouches.jpg";
+import houseImg from "@/assets/housecleanout.jpg";
+import commercialImg from "@/assets/commercialthumb2.jpg";
+import teamImg from "@/assets/team2.jpg";
+
+<ServiceSection index={0} heading="After the Garage Sale, We Handle the Rest" body="You priced it, you staged it, you sold what you could. Now you're left with everything nobody wanted. We pick up all the remaining rummage — furniture, clothes, household goods, boxes, and miscellaneous items — and haul it away so your garage, basement, or yard is finally clear." image={truckImg} />
+
+<ServiceSection index={1} heading="Donation Pickup Fell Through?" body="Charity pickups get cancelled. Donation centers have size limits. We don't. We take everything in one visit regardless of quantity. Usable items go to local donation partners; everything else is disposed of responsibly. You get the same result — stuff gone — without the hassle." image={houseImg} />
+
+<ServiceSection index={2} heading="Downsizing and Decluttering" body="Moving to a smaller home? Helping a parent downsize? Years of accumulated household goods don't have to go to the landfill. We sort what can be donated, recycle what we can, and haul the rest. One visit is usually all it takes." image={commercialImg} />
+
+<ServiceSection index={3} heading="Fast, Flexible Scheduling" body="Rummage removal jobs tend to be time-sensitive — after a sale, before a move, or when you finally just want it gone. We offer same-day and next-day appointments throughout NJ. Call us, describe what you have, and we'll give you a price before we arrive." image={teamImg} />

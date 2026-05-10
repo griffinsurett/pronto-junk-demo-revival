@@ -53,16 +53,12 @@ const indexVariant = collectionMeta?.indexVariant ?? "GridVariant";
     />
 
     {/* Content - Either custom MDX or default grid */}
-    <div class="container mx-auto px-4 pb-16">
-      {
-        hasContent && Content ? (
-          /* Custom MDX content from _meta.mdx body */
-          <Content />
-        ) : (
-          /* Default: Grid of collection items */
-          <ContentRenderer query={query(collectionName)} variant={indexVariant} />
-        )
-      }
-    </div>
+    {hasContent && Content ? (
+      <Content />
+    ) : (
+      <div class="container mx-auto px-4 pb-16">
+        <ContentRenderer query={query(collectionName)} variant={indexVariant} />
+      </div>
+    )}
   </main>
 </BaseLayout>

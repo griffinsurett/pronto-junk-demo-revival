@@ -13,11 +13,6 @@ itemsLinkBehavior:
   linkPrefix: linkPrefix
   valueFormatter: phone
 ---
-import ContentRenderer from "@/components/ContentRenderer/ContentRenderer.astro";
-import { query } from "@/utils/query";
+import ContactPage from "@/components/ContactPage.astro";
 
-<ContentRenderer
-  query={query("contact-us")}
-  variant="ContactVariant"
-  columns={2}
-/>
+<ContactPage />

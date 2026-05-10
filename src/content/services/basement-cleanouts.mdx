@@ -2,4 +2,20 @@
 title: "Basement Clean Outs"
 description: "From water-damaged items to years of clutter, we completely clear basements so you can convert, renovate, or simply breathe easier."
 order: 5
+featuredImage:
+  src: "../../assets/basementthumb2.jpg"
+  alt: "Cluttered basement packed with tools and debris"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import basementImg from "@/assets/basementthumb.jpg";
+import basementImg2 from "@/assets/basementthumb2.jpg";
+import truckImg from "@/assets/truckwstuff.jpg";
+import teamImg from "@/assets/team1.jpg";
+
+<ServiceSection index={0} heading="Everything Goes — No Sorting Required" body="Most basement cleanouts stall because homeowners don't know what to keep and what to toss. We take that pressure off completely. You point, we haul. Whether it's broken appliances, old furniture, boxes you haven't touched in a decade, or water-damaged materials — it all goes in one trip." image={basementImg} />
+
+<ServiceSection index={1} heading="What We Remove From Basements" body="Basements collect everything over the years. We've cleared out old water heaters, oil tanks, exercise equipment, shelving units, construction debris, mold-affected materials, and mountains of boxes no one can identify anymore. If it fits in the basement, we can get it out — safely and efficiently." image={basementImg2} />
+
+<ServiceSection index={2} heading="Same-Day and Weekend Service" body="We know basement cleanouts often come up before a renovation, sale, or move — when timing matters. That's why we offer same-day and weekend appointments throughout NJ. Our crew shows up on time, works fast, and leaves the space broom-swept." image={truckImg} />
+
+<ServiceSection index={3} heading="Trusted, Insured, and Locally Operated" body="We're a local NJ junk removal company, not a franchise. Every crew member is background-checked and we carry full liability insurance. When you call Pronto, you're dealing with the people who do the work — not a call center." image={teamImg} />

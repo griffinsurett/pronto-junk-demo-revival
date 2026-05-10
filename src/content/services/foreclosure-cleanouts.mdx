@@ -2,4 +2,20 @@
 title: "Foreclosure Cleanouts"
 description: "We help banks, realtors, and property managers quickly clean out foreclosed properties so they're market-ready — furniture, debris, and all."
 order: 3
+featuredImage:
+  src: "../../assets/foreclosurethumb.jpg"
+  alt: "Foreclosure property sign in front of house"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import foreclosureImg from "@/assets/foreclosurethumb.jpg";
+import foreclosureImg2 from "@/assets/foreclosurethumb2.jpg";
+import houseImg from "@/assets/housecleanout2.jpg";
+import truckImg from "@/assets/truckwstuff.jpg";
+
+<ServiceSection index={0} heading="Fast Turnarounds for Real Estate Professionals" body="Banks, real estate investors, and agents rely on us to clear foreclosed properties quickly so they can be listed, renovated, or resold. We understand the timelines involved and prioritize foreclosure jobs accordingly — often available within days of your call." image={foreclosureImg} />
+
+<ServiceSection index={1} heading="Everything the Previous Occupants Left Behind" body="Foreclosed homes often contain abandoned furniture, appliances, personal belongings, trash, debris, and sometimes hazardous materials. We remove it all — every room, every floor, garage, basement, and yard — in a single mobilization." image={foreclosureImg2} />
+
+<ServiceSection index={2} heading="Property Left Broom-Swept" body="We don't just haul the big stuff and call it done. When we finish a foreclosure cleanout, the property is left broom-swept and ready for your contractor, photographer, or the next showing. No debris, no surprises." image={houseImg} />
+
+<ServiceSection index={3} heading="Transparent Pricing for Investors" body="Real estate investors work on tight margins. We give you an upfront price before work begins, based on volume — not time. No hourly billing surprises, no scope creep. You know your cost before we start." image={truckImg} />

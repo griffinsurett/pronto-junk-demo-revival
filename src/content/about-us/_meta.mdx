@@ -12,3 +12,21 @@ addToMenu:
     order: 2
   - menu: "footer-menu"
 ---
+import AboutSection from "@/components/AboutSection.astro";
+import BenefitsVariant from "@/components/ContentRenderer/variants/BenefitsVariant.astro";
+
+<AboutSection />
+
+<BenefitsVariant
+  title="Our Mission & Vision"
+  items={[
+    {
+      title: "Our Mission",
+      description: "To make junk removal fast, affordable, and stress-free for every homeowner, landlord, and business in New Jersey — showing up when we say we will and hauling everything in one trip.",
+    },
+    {
+      title: "Our Vision",
+      description: "To build the most trusted junk removal brand in NJ — a local crew known for reliability, responsibility, and treating every job with the care and respect it deserves.",
+    },
+  ]}
+/>

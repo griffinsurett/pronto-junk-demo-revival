@@ -1,0 +1,227 @@
+---
+import { find, query, sortByOrder } from "@/utils/query";
+import { animationProps } from "@/integrations/scroll-animations";
+import FormWrapper from "@/components/Form/FormWrapper";
+import Input from "@/components/Form/inputs/Input";
+import Textarea from "@/components/Form/inputs/Textarea";
+import Select from "@/components/Form/inputs/Select";
+import Checkbox from "@/components/Form/inputs/Checkbox";
+import Button from "@/components/Button/Button";
+import Icon from "@/components/Icon";
+
+const phoneEntry  = await find("contact-us", "phone");
+const locationEntry = await find("contact-us", "location");
+
+const phone    = phoneEntry?.data?.description  ?? "732-710-5405";
+const address  = (locationEntry?.data as any)?.description ?? "Woodbridge Township, NJ 07095";
+const mapUrl   = (locationEntry?.data as any)?.url ?? "#";
+
+const serviceEntries = await query("services").orderBy(sortByOrder()).all();
+const serviceOptions = serviceEntries.map((e) => ({
+  value: e.data.title,
+  label: e.data.title,
+}));
+
+const hearAboutOptions = [
+  { value: "google",      label: "Google Search" },
+  { value: "facebook",    label: "Facebook / Instagram" },
+  { value: "referral",    label: "Friend or Family Referral" },
+  { value: "nextdoor",    label: "Nextdoor" },
+  { value: "yelp",        label: "Yelp" },
+  { value: "flyer",       label: "Flyer / Door Hanger" },
+  { value: "repeat",      label: "Returning Customer" },
+  { value: "other",       label: "Other" },
+];
+
+const formId = import.meta.env.PUBLIC_FORMSPREE_CONTACT_ID || import.meta.env.PUBLIC_FORMSPREE_ID;
+
+const inputCls = "w-full px-4 py-3 bg-neutral-50 border border-neutral-200 text-[#111] placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent rounded-none";
+const labelCls = "block font-rob font-medium text-[13px] uppercase tracking-widest text-[#555] mb-1";
+const selectCls = "w-full px-4 py-3 bg-neutral-50 border border-neutral-200 text-[#111] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent rounded-none appearance-none";
+---
+
+<section class="bg-white">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-16 lg:py-[80px]">
+
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 items-start">
+
+      {/* ── Left: dark info panel ── */}
+      <div {...animationProps("fade-in-left", { once: true })} class="lg:w-[360px] shrink-0 bg-black text-white p-8 lg:p-10">
+
+        <p class="font-rob text-[13px] uppercase tracking-widest text-primary font-medium mb-3">Get In Touch</p>
+        <h2 class="font-mont font-bold text-[30px] lg:text-[36px] leading-[1.1] text-white mb-5">
+          Let's Clear It Out
+        </h2>
+        <p class="font-sans text-[16px] leading-[1.75] text-white/70 mb-8">
+          Ready to reclaim your space? Fill out the form and we'll get back to you with a free, no-obligation quote — usually within a few hours.
+        </p>
+
+        {/* Contact items */}
+        <div class="space-y-8 mb-8">
+          <a href={`tel:${phone.replace(/\D/g,"")}`} class="flex items-center gap-5 group">
+            <Icon icon="lu:phone" size="2xl" className="text-primary shrink-0" />
+            <div>
+              <p class="font-rob text-[11px] uppercase tracking-widest text-white/50 mb-0.5">Call Us</p>
+              <p class="font-mont font-bold text-[17px] text-white group-hover:text-primary transition-colors">{phone}</p>
+            </div>
+          </a>
+
+          <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 group">
+            <Icon icon="lu:map-pin" size="2xl" className="text-primary shrink-0" />
+            <div>
+              <p class="font-rob text-[11px] uppercase tracking-widest text-white/50 mb-0.5">Location</p>
+              <p class="font-mont font-bold text-[17px] text-white group-hover:text-primary transition-colors">{address}</p>
+            </div>
+          </a>
+
+          <div class="flex items-center gap-5">
+            <Icon icon="lu:clock" size="2xl" className="text-primary shrink-0" />
+            <div>
+              <p class="font-rob text-[11px] uppercase tracking-widest text-white/50 mb-0.5">Hours</p>
+              <p class="font-mont font-bold text-[17px] text-white">Mon – Sun: 7am – 8pm</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div class="h-px bg-white/10 mb-6"></div>
+
+        <p class="font-sans text-[14px] text-white/50 leading-relaxed">
+          Serving Woodbridge Township and all of Middlesex County, NJ. Same-day service available — call us directly for fastest response.
+        </p>
+      </div>
+
+      {/* ── Right: form on white ── */}
+      <div {...animationProps("fade-in-right", { once: true, delay: 100 })} class="flex-1 w-full min-w-0">
+
+        <div class="border border-neutral-200 p-8 lg:p-10">
+          <h3 class="font-mont font-bold text-[22px] text-[#111] mb-1">Request a Free Quote</h3>
+          <p class="font-sans text-[15px] text-[#777] mb-8">No obligation. We'll respond within a few hours.</p>
+
+          <FormWrapper
+            client:idle
+            formspreeId={formId}
+            useNativeFormSubmission={Boolean(formId)}
+            successMessage="Thanks! We'll be in touch shortly with your free quote."
+            errorMessage="Something went wrong. Please try again or call us directly."
+            resetOnSuccess={true}
+            className="w-full"
+          >
+            <input type="hidden" name="formName" value="Pronto Contact Form" />
+
+            {/* Name row */}
+            <div class="flex flex-col sm:flex-row gap-4 mb-4">
+              <Input
+                name="firstName"
+                label="First Name"
+                type="text"
+                required={true}
+                minLength={2}
+                placeholder="First Name"
+                containerClassName="flex-1 mb-0"
+                labelClassName={labelCls}
+                inputClassName={inputCls}
+              />
+              <Input
+                name="lastName"
+                label="Last Name"
+                type="text"
+                required={true}
+                minLength={2}
+                placeholder="Last Name"
+                containerClassName="flex-1 mb-0"
+                labelClassName={labelCls}
+                inputClassName={inputCls}
+              />
+            </div>
+
+            {/* Contact row */}
+            <div class="flex flex-col sm:flex-row gap-4 mb-4">
+              <Input
+                name="email"
+                label="Email"
+                type="email"
+                required={true}
+                placeholder="you@email.com"
+                containerClassName="flex-1 mb-0"
+                labelClassName={labelCls}
+                inputClassName={inputCls}
+              />
+              <Input
+                name="phone"
+                label="Phone Number"
+                type="tel"
+                required={true}
+                pattern="[0-9]{10,}"
+                placeholder="732-000-0000"
+                containerClassName="flex-1 mb-0"
+                labelClassName={labelCls}
+                inputClassName={inputCls}
+              />
+            </div>
+
+            {/* Service + Referral row */}
+            <div class="flex flex-col sm:flex-row gap-4 mb-4">
+              <Select
+                name="service"
+                label="Service Needed"
+                required={true}
+                options={serviceOptions}
+                placeholder="Select a service..."
+                containerClassName="flex-1 mb-0"
+                labelClassName={labelCls}
+                selectClassName={selectCls}
+              />
+              <Select
+                name="hearAboutUs"
+                label="How Did You Hear About Us?"
+                options={hearAboutOptions}
+                placeholder="Select an option..."
+                containerClassName="flex-1 mb-0"
+                labelClassName={labelCls}
+                selectClassName={selectCls}
+              />
+            </div>
+
+            {/* Message */}
+            <Textarea
+              name="message"
+              label="Tell Us About the Job"
+              required={true}
+              minLength={10}
+              placeholder="Describe what needs to be removed, rough quantity, location in the home, etc."
+              rows={5}
+              containerClassName="mb-4"
+              labelClassName={labelCls}
+              textareaClassName={`${inputCls} resize-vertical`}
+            />
+
+            {/* Privacy */}
+            <Checkbox
+              name="privacy"
+              required
+              containerClassName="mb-6"
+              checkboxClassName="w-4 h-4 accent-primary border-neutral-300"
+              labelClassName="font-sans text-[14px] text-[#555]"
+            >
+              I agree to the{" "}
+              <Button variant="link" href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                Privacy Policy
+              </Button>
+            </Checkbox>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              class="btn-yellow w-full h-[56px] font-mont font-bold text-[17px] rounded-none flex items-center justify-center gap-2"
+            >
+              Get My Free Quote
+              <Icon icon="lu:arrow-right" size="sm" className="text-black" />
+            </button>
+          </FormWrapper>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

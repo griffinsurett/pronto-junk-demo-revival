@@ -2,4 +2,20 @@
 title: "Storage Clean Outs"
 description: "Clearing out a storage unit doesn't have to be a weekend project. We load and haul everything out so you stop paying for space you don't need."
 order: 7
+featuredImage:
+  src: "../../assets/storagethumb.jpg"
+  alt: "Storage unit packed full of furniture and belongings"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import storageImg from "@/assets/storagethumb.jpg";
+import storageImg2 from "@/assets/storagethumb2.jpg";
+import truckImg from "@/assets/truckwcouches.jpg";
+import teamImg from "@/assets/team2.jpg";
+
+<ServiceSection index={0} heading="Stop Paying for Space You Don't Use" body="Monthly storage fees add up fast. If you haven't opened that unit in over a year, chances are you don't need what's inside. We empty storage units completely so you can close the account, stop the billing, and move on." image={storageImg} />
+
+<ServiceSection index={1} heading="We Come to the Facility" body="You don't need to move anything beforehand. Just give us the location and access information. We'll meet you at the storage facility, load everything into our truck, and haul it away. Most units are cleared in under two hours." image={storageImg2} />
+
+<ServiceSection index={2} heading="What We Take From Storage Units" body="Furniture, appliances, boxes, bins, bagged items, old electronics, sporting equipment, clothing, and whatever else has been accumulating — it all goes. We don't cherry-pick. We take the whole unit in one shot." image={truckImg} />
+
+<ServiceSection index={3} heading="Donate, Recycle, Dispose — Responsibly" body="We don't just dump everything. Usable furniture and household goods go to local donation centers. Electronics get recycled properly. What can't be donated or recycled is disposed of responsibly. You get a cleared unit and a clean conscience." image={teamImg} />

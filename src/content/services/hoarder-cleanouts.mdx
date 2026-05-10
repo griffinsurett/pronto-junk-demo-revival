@@ -2,4 +2,20 @@
 title: "Hoarder House Clean Outs"
 description: "We handle hoarder cleanouts with care and professionalism. Our team removes years of accumulated items efficiently, treating every job with dignity and respect."
 order: 9
+featuredImage:
+  src: "../../assets/hoarderhousethumb.jpg"
+  alt: "Hoarder house packed floor to ceiling with belongings"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import hoarderImg from "@/assets/hoarderhousethumb.jpg";
+import hoarderImg2 from "@/assets/hoarderhousethumb2.jpg";
+import truckImg from "@/assets/truckwcynders.jpg";
+import teamImg from "@/assets/team2.jpg";
+
+<ServiceSection index={0} heading="No Judgment — Just Results" body="Hoarding situations require a specific kind of professionalism: patience, efficiency, and zero judgment. Our crew has handled homes packed floor to ceiling. We approach every job with respect for the people involved and focus entirely on getting the space safe and livable again." image={hoarderImg} />
+
+<ServiceSection index={1} heading="Room by Room or Whole Property" body="We work however the situation requires — room by room for staged cleanouts coordinated with care teams or family members, or the whole property in one mobilization when the timeline demands it. We adapt to the situation, not the other way around." image={hoarderImg2} />
+
+<ServiceSection index={2} heading="We've Handled the Worst" body="Decades of accumulation, narrow pathways, structural concerns — nothing surprises our team. We work systematically, moving from room to room, removing debris, furniture, bagged items, and heavy objects safely without damaging the property." image={truckImg} />
+
+<ServiceSection index={3} heading="Coordinating With Families and Professionals" body="Many hoarder cleanouts involve family members, social workers, or care teams. We're experienced at coordinating with everyone involved, communicating clearly about what's being removed, and working at a pace that respects the sensitivity of the situation." image={teamImg} />

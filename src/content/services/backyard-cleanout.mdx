@@ -2,4 +2,20 @@
 title: "Backyard Cleanout"
 description: "Old furniture, brush, debris, or construction waste piling up outside? We clean up outdoor spaces — yards, patios, and driveways — top to bottom."
 order: 10
+featuredImage:
+  src: "../../assets/pileofbricks1.jpg"
+  alt: "Large pile of bricks and debris in backyard ready for removal"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import bricksImg from "@/assets/pileofbricks1.jpg";
+import bricksImg2 from "@/assets/pileofbricks2.jpg";
+import truckImg from "@/assets/truckwstuff.jpg";
+import teamImg from "@/assets/team1.jpg";
+
+<ServiceSection index={0} heading="Outdoor Spaces Cleared Top to Bottom" body="Your backyard should be somewhere you want to spend time. Whether it's an old patio set that's been sitting for years, a pile of bricks from a demo project, or a shed full of junk — we clear it out completely. One visit and it's done." image={bricksImg} />
+
+<ServiceSection index={1} heading="Everything We Haul From Outdoors" body="We remove old patio furniture, outdoor equipment, swing sets, play structures, sheds, concrete blocks, bricks, landscaping debris, brush piles, branches, and post-renovation construction waste. If it's outside and needs to go, we take it." image={bricksImg2} />
+
+<ServiceSection index={2} heading="Curb Appeal Before a Sale" body="Selling a property? Outdoor clutter is one of the first things buyers notice. We help homeowners and real estate agents get properties showing-ready fast. We can be on-site within days and clear the yard in a single visit." image={truckImg} />
+
+<ServiceSection index={3} heading="Commercial and Residential Outdoor Cleanouts" body="We serve both residential yards and commercial properties throughout NJ. Apartment complex common areas, commercial lots, rental properties between tenants — we handle outdoor cleanouts of any scale, billed by volume with upfront pricing." image={teamImg} />

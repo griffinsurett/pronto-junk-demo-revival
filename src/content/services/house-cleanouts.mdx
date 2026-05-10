@@ -2,4 +2,20 @@
 title: "House Cleanouts"
 description: "Whole-home cleanouts for estate sales, moves, or renovations. We remove everything from a single room to an entire house — quickly and responsibly."
 order: 8
+featuredImage:
+  src: "../../assets/housecleanout.jpg"
+  alt: "Full house cleanout with furniture and debris piled in driveway"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import houseImg from "@/assets/housecleanout.jpg";
+import houseImg2 from "@/assets/housecleanout2.jpg";
+import houseImg3 from "@/assets/housecleanout3.jpg";
+import truckImg from "@/assets/truckwcouches.jpg";
+
+<ServiceSection index={0} heading="One Call Clears the Whole House" body="Moving, selling, or handling an estate? We empty entire homes so you don't have to make a hundred trips or coordinate multiple haulers. From the attic to the basement, every room, every floor — one crew, one visit, one price." image={houseImg} />
+
+<ServiceSection index={1} heading="Furniture, Appliances, and Everything Between" body="We remove all furniture — beds, sofas, dressers, dining sets. We take appliances — washers, dryers, refrigerators, stoves. We handle carpeting, renovation debris, garage contents, and everything else that needs to go. If it's in the house, we can haul it." image={houseImg2} />
+
+<ServiceSection index={2} heading="Estate Cleanouts Done With Respect" body="Losing a loved one is already hard enough. We work with families navigating estate cleanouts with care and discretion. We sort what we can for donation, handle disposal responsibly, and treat every job — and every family — with dignity." image={houseImg3} />
+
+<ServiceSection index={3} heading="Priced by Volume, Not by the Hour" body="We give you an upfront price before we start — based on how much space your items take in our truck. No hourly guessing, no surprise add-ons. You know exactly what you're paying before we lift a single piece of furniture." image={truckImg} />

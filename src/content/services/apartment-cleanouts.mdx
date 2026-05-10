@@ -2,4 +2,20 @@
 title: "Apartment Clean Outs"
 description: "Moving out or turning over a unit? We remove all leftover furniture, appliances, and junk fast — perfect for landlords and tenants alike."
 order: 6
+featuredImage:
+  src: "../../assets/apartmentthumb.jpg"
+  alt: "Apartment filled with trash bags, boxes, and appliances ready for removal"
 ---
+import ServiceSection from "@/layouts/ServiceSection.astro";
+import aptImg from "@/assets/apartmentthumb.jpg";
+import houseImg from "@/assets/housecleanout4.jpg";
+import truckImg from "@/assets/truckimg.jpg";
+import teamImg from "@/assets/team1.jpg";
+
+<ServiceSection index={0} heading="Keys Back, Fast" body="Whether you're a tenant moving out or a landlord dealing with what the last tenant left behind, we get apartment units cleared quickly. We work around building access windows, elevator scheduling, and tight hallways — we've done it hundreds of times." image={aptImg} />
+
+<ServiceSection index={1} heading="Everything Left Behind" body="Abandoned furniture, old appliances, boxes of belongings, trash bags, mattresses, electronics — we take everything. You don't need to sort it or move it to the door. We go room by room and load everything directly." image={houseImg} />
+
+<ServiceSection index={2} heading="Landlords and Property Managers" body="We work regularly with landlords and property management companies across NJ to turn over units between tenants. Quick, reliable, and professional — we help you get the unit back on the market as fast as possible." image={truckImg} />
+
+<ServiceSection index={3} heading="Building-Friendly Service" body="We know apartment buildings have rules — freight elevators, service entrances, scheduling windows. We coordinate with building management, use the right access points, and protect common areas during the job. No complaints from your neighbors or super." image={teamImg} />
