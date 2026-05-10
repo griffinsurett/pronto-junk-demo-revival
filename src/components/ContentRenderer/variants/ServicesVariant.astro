@@ -3,13 +3,12 @@ import type { BaseVariantProps } from "../ContentRenderer.types";
 
 interface Props extends BaseVariantProps {}
 const { items = [], title } = Astro.props as Props;
+
 ---
 
 <div>
-  {title && (
-    <h3 id="services" class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333]">{title}</h3>
-  )}
-  <div class="mt-4 space-y-3">
+  <h3 id="services" class="font-mont font-bold text-[25px] leading-[37.5px] text-[#333] mb-4">Residential and Commercial Junk Removal Services</h3>
+  <div class="space-y-3">
     {items.map((item) => (
       <details>
         <summary class="flex items-center gap-3 py-1 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
@@ -24,10 +23,7 @@ const { items = [], title } = Astro.props as Props;
           {item.description && (
             <p class="font-sans text-[15px] leading-[1.6] text-[#555]">{item.description}</p>
           )}
-          <a
-            href={`/services/${item.slug}`}
-            class="inline-block mt-3 text-[13px] font-sans text-black border-b-2 border-primary hover:opacity-70 transition-opacity"
-          >
+          <a href={`/services/${item.slug}`} class="inline-block mt-3 text-[13px] font-sans text-black border-b-2 border-primary hover:opacity-70 transition-opacity">
             Learn More →
           </a>
         </div>
