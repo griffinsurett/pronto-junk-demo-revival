@@ -1,0 +1,9 @@
+---
+// src/integrations/chatbot/chatbot.integration.astro
+import ChatBot from "./ChatBot.tsx";
+import { KNOWLEDGE_BASE } from "./knowledge-base.generated";
+
+const kbReady = KNOWLEDGE_BASE.trim().length > 0 && KNOWLEDGE_BASE !== "placeholder";
+---
+
+{kbReady && <ChatBot client:firstInteraction />}

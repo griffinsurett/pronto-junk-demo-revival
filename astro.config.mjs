@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 import { SITE_URL } from './src/content/siteDomain.js';
 import { buildRedirectConfig } from './src/utils/redirects';
 import { manualChunks, assetFileNames } from './vite.chunks.js';
@@ -12,6 +13,7 @@ import iconGeneratorIntegration from './src/integrations/icons/icon-generator.in
 import clientDirectivesIntegration from './src/integrations/client-directives/client-directives.integration.mjs';
 import conditionalPartytown from './src/integrations/partytown/partytown.integration.mjs';
 import robotsLlmsIntegration from './src/integrations/robots-llms/robots-llms.integration.ts';
+import chatbotKbIntegration from './src/integrations/chatbot/chatbot-kb.integration.ts';
 
 const redirects = await buildRedirectConfig();
 const siteUrl = SITE_URL;
@@ -23,6 +25,7 @@ export default defineConfig({
   trailingSlash: 'never',
   server: { port: 7656 },
   output: 'static',
+  adapter: vercel(),
   
   vite: {
     resolve: {
@@ -60,6 +63,7 @@ export default defineConfig({
     sitemap(),
     conditionalPartytown(),
     robotsLlmsIntegration(),
+    chatbotKbIntegration(),
   ],
   
   build: {
