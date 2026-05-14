@@ -52,10 +52,14 @@ let responsiveImages = null;
 
 if (backgroundMedia?.image?.src) {
   const rawSrc = backgroundMedia.image.src;
-  const isProcessedImage = 
-    typeof rawSrc === 'object' && 
+  // A getImage() result has only { src, attributes } — no width/height/format.
+  // An imported Astro image has width, height, format, etc. and must go through getImage().
+  const isProcessedImage =
+    typeof rawSrc === 'object' &&
     rawSrc !== null &&
-    typeof rawSrc.src === 'string';
+    typeof rawSrc.src === 'string' &&
+    rawSrc.width === undefined &&
+    rawSrc.height === undefined;
   
   if (!isProcessedImage && typeof rawSrc !== 'string') {
     try {
