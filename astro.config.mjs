@@ -25,7 +25,7 @@ export default defineConfig({
   trailingSlash: 'never',
   server: { port: 7656 },
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({ imageService: false }),
   
   vite: {
     resolve: {
