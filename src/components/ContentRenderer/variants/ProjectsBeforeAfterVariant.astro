@@ -1,23 +1,45 @@
 ---
 import type { BaseVariantProps } from "../ContentRenderer.types";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
+import { getImage } from "astro:assets";
 
 interface Props extends BaseVariantProps {}
 const { items = [], title } = Astro.props as Props;
 
-function imgSrc(raw: any): string | undefined {
+function extractImageMetadata(raw: any): any | undefined {
   if (!raw) return undefined;
-  if (typeof raw === "string") return raw;
-  if (raw.src) return typeof raw.src === "string" ? raw.src : (raw.src?.src ?? undefined);
+  if (typeof raw === "string") return undefined;
+  // { src: ImageMetadata, alt? }
+  if (raw.src && typeof raw.src === "object" && "width" in raw.src) return raw.src;
+  // Direct ImageMetadata
+  if (typeof raw === "object" && "width" in raw) return raw;
   return undefined;
 }
 
-const carouselItems = items.map((item) => ({
-  title: item.title,
-  location: (item as any).location,
-  beforeImage: imgSrc((item as any).beforeImage),
-  afterImage: imgSrc((item as any).afterImage),
-}));
+function extractStringUrl(raw: any): string | undefined {
+  if (!raw) return undefined;
+  if (typeof raw === "string") return raw;
+  if (raw.src && typeof raw.src === "string") return raw.src;
+  return undefined;
+}
+
+async function resolveImageUrl(raw: any): Promise<string | undefined> {
+  const meta = extractImageMetadata(raw);
+  if (meta) {
+    const result = await getImage({ src: meta });
+    return result.src;
+  }
+  return extractStringUrl(raw);
+}
+
+const carouselItems = await Promise.all(
+  items.map(async (item) => ({
+    title: item.title,
+    location: (item as any).location,
+    beforeImage: await resolveImageUrl((item as any).beforeImage),
+    afterImage: await resolveImageUrl((item as any).afterImage),
+  }))
+);
 ---
 
 <ProjectsCarousel items={carouselItems} title={title} client:visible />

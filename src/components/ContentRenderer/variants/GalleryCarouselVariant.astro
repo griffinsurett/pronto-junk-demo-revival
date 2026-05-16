@@ -2,24 +2,44 @@
 import type { BaseVariantProps } from "../ContentRenderer.types";
 import GalleryCarousel from "@/components/GalleryCarousel";
 import { animationProps } from "@/integrations/scroll-animations";
+import { getImage } from "astro:assets";
 
 interface Props extends BaseVariantProps {}
 const { items = [], title, description } = Astro.props as Props;
 
-function imgSrc(raw: any): string | undefined {
+function extractImageMetadata(raw: any): any | undefined {
   if (!raw) return undefined;
-  if (typeof raw === "string") return raw;
-  if (raw.src) return typeof raw.src === "string" ? raw.src : (raw.src?.src ?? undefined);
+  if (typeof raw === "string") return undefined;
+  if (raw.src && typeof raw.src === "object" && "width" in raw.src) return raw.src;
+  if (typeof raw === "object" && "width" in raw) return raw;
   return undefined;
 }
 
-const galleryItems = items
-  .map((item) => {
-    const src = imgSrc((item as any).featuredImage);
-    if (!src) return null;
-    return { src, alt: (item as any).featuredImage?.alt ?? item.title ?? "" };
-  })
-  .filter(Boolean) as { src: string; alt: string }[];
+function extractStringUrl(raw: any): string | undefined {
+  if (!raw) return undefined;
+  if (typeof raw === "string") return raw;
+  if (raw.src && typeof raw.src === "string") return raw.src;
+  return undefined;
+}
+
+async function resolveImageUrl(raw: any): Promise<string | undefined> {
+  const meta = extractImageMetadata(raw);
+  if (meta) {
+    const result = await getImage({ src: meta });
+    return result.src;
+  }
+  return extractStringUrl(raw);
+}
+
+const galleryItems = (
+  await Promise.all(
+    items.map(async (item) => {
+      const src = await resolveImageUrl((item as any).featuredImage);
+      if (!src) return null;
+      return { src, alt: (item as any).featuredImage?.alt ?? item.title ?? "" };
+    })
+  )
+).filter(Boolean) as { src: string; alt: string }[];
 ---
 
 <div {...animationProps("fade-in-up", { once: true })}>
