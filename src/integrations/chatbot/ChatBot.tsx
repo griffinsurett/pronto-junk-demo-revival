@@ -195,7 +195,7 @@ const UserMessage = memo(({ msg }: { msg: Message }) => (
 function Fab({ open, unread, onClick }: { open: boolean; unread: number; onClick: () => void }) {
   return (
     <button
-      id="pronto-chatbot-trigger"
+      id="chatbot-trigger"
       onClick={onClick}
       type="button"
       aria-label={open ? "Close chat" : "Chat with Pronto"}
