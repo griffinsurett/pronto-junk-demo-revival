@@ -79,5 +79,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml"
+    }
   ]
 }

@@ -31,6 +31,7 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@site': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
     plugins: [tailwindcss()],
@@ -57,10 +58,15 @@ export default defineConfig({
     clientDirectivesIntegration(),
     iconGeneratorIntegration(),
     mdx(),
-    react({
-      include: ['**/react/*', '**/components/**/*.jsx', '**/components/**/*.tsx', '**/hooks/**/*.js', '**/hooks/**/*.ts'],
-    }),
-    sitemap(),
+    react(),
+    // `/sitemap.xml` is rewritten to this integration's sitemap-index.xml in
+    // vercel.json — tools that guess /sitemap.xml got a 404 and concluded
+    // there was no sitemap at all.
+    //
+    // `lastmod` is a native option. Build time is the honest value for a
+    // static site: it IS when each page was generated. Per-page content dates
+    // would need `serialize`.
+    sitemap({ lastmod: new Date() }),
     conditionalPartytown(),
     robotsLlmsIntegration(),
     chatbotKbIntegration(),
