@@ -30,7 +30,10 @@ const data = entry?.data || {};
 const featuredImageSrc = getImageSrc(data.featuredImage);
 ---
 
-<BaseLayout {...seoProps}>
+{/* Editorial content opts IN to BlogPosting. SEO.astro defaults to WebPage —
+    a publishDate alone doesn't imply a post (legal docs carry one too).
+    Spread last so a post's own seo.* still wins. */}
+<BaseLayout {...seoProps} seo={{ schemaType: "BlogPosting", ...(seoProps as any).seo }}>
   <main class="container mx-auto px-4 py-8">
     <article class="max-w-4xl mx-auto">
       {/* Featured image */}

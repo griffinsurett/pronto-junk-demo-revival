@@ -1,5 +1,6 @@
 // src/content/schema.ts
-import { z, reference, type CollectionKey } from "astro:content";
+import { z } from "astro/zod";
+import { reference, type CollectionKey } from "astro:content";
 
 // ============================================================================
 // REFERENCE SCHEMA
@@ -280,6 +281,9 @@ export const seoSchema = ({ image }: { image: Function }) =>
       twitterCard: z
         .enum(["summary", "summary_large_image", "app", "player"])
         .optional(),
+      // schema.org @type for the page node. Defaults to WebPage (WebSite at
+      // the root); editorial content sets "BlogPosting"/"Article" explicitly.
+      schemaType: z.string().optional(),
       robots: z.string().optional(),
       canonicalUrl: z.string().url().optional(),
       keywords: z.array(z.string()).optional(),
